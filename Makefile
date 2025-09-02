@@ -1,19 +1,20 @@
 CC = cc 
-CFLAGS = -Wall -Wextra -Werror 
+CFLAGS = -Wall -Wextra -Werror -g3
 
-SRCS = yakuza.c 
+SRCS = main.c events.c
 OBJCS = $(SRCS:.c=.o)
 
 
 NAME = yakuza
 DIR_LIB = ./libft
 LIBFT = $(DIR_LIB)/libft.a
+MLX_FLAGS = -lmlx -lX11 -lXext -lm
 
 
 all: $(LIBFT) $(NAME)
 
 $(NAME): $(OBJCS) $(LIBFT) yakuza.h
-	$(CC) $(CFLAGS) $(OBJCS) -L$(DIR_LIB) -I$(DIR_LIB) -lft -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJCS) -L$(DIR_LIB) -I$(DIR_LIB) -lft -o $(NAME) $(MLX_FLAGS)
 
 $(LIBFT):
 	make -C $(DIR_LIB)  # Build the libft library

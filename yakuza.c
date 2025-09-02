@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 12:08:28 by modat             #+#    #+#             */
-/*   Updated: 2025/09/01 15:13:20 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/02 08:53:43 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	not_valid_file(char *file)
 	char	ext[4];
 
 	len = ft_strlen(file);
-	i = 0;
+	i = 0;	
 	while (i < 4 && len >= 0)
 	{
 		ext[i] = file[len - 1];
