@@ -1,8 +1,8 @@
 
-NO ./texture/wall_window.xpm
-SO ./texture/wall.xpm
-WE ./texture/wall_window.xpm
-EA ./texture/wall.xpm
+NO ./texture/wall_window.xpm42
+SO ./texture/wall.xpm42
+WE ./texture/wall_window.xpm42
+EA ./texture/wall.xpm42
 
 F 15,6,40
 C 171,154,137

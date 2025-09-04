@@ -1,53 +1,14 @@
-# CC = cc 
-# CFLAGS = -Wall -Wextra -Werror -g3 
-
-# SRCS = main.c events.c
-# OBJCS = $(SRCS:.c=.o)
-
-
-# NAME = yakuza
-
-# DIR_LIB = ./libft
-# LIBFT = $(DIR_LIB)/libft.a
-
-
-# DIR_MLX = ./MLX42
-# MLX = $(DIR_MLX)/libmlx.a
-# MLX_INC = I$(DIR_MLX)/include
-# MLX_FLAGS = L$(DIR_MLX) -lmlx -lX11 -lXext -lm 
-
-
-# all: $(LIBFT) $(MLX) $(NAME)
-
-# $(NAME): $(OBJCS) $(LIBFT) $(MLX) yakuza.h
-# 	$(CC) $(CFLAGS) $(OBJCS) -L$(DIR_LIB) -lft $(MLX_FLAGS) -o $(NAME) -I$(DIR_LIB) $(MLX_INC)
-
-# $(LIBFT):
-# 	make -C $(DIR_LIB) 
-
-# $(MLX):
-# 	make -C $(DIR_MLX)
-
-# re: fclean all
-# clean:
-# 	make clean -C $(DIR_LIB)
-# # 	make clean -C $(DIR_MLX)
-# 	rm -f $(OBJCS)
-
-# fclean: clean
-# 	make fclean -C $(DIR_LIB)
-# # 	make fclean -C $(DIR_MLX)
-# 	rm -f $(NAME)
-# .PHONY: all re clean fclean
-
-
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
-
-SRCS = main.c events.c
-OBJCS = $(SRCS:.c=.o)
+CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -g3
 
 NAME = yakuza
+
+SRC_DIR = srcs
+SRC_FILES = main colors events init_mlx 
+INC_DIR = include
+
+SRCS =  $(addsuffix .c, $(addprefix $(SRC_DIR)/, $(SRC_FILES))) 
+OBJCS = $(SRCS:.c=.o)
 
 # ---------------- LIBFT ----------------
 DIR_LIB = ./libft
@@ -57,13 +18,17 @@ LIBFT = $(DIR_LIB)/libft.a
 DIR_MLX = ./MLX42
 MLX_LIB = $(DIR_MLX)/build/libmlx42.a
 MLX_INC = -I$(DIR_MLX)/include
-MLX_FLAGS = -ldl -lglfw -pthread -lm
+MLX_FLAGS = -L/usr/local/lib -ldl -lglfw -pthread -lm
+# MLX_FLAGS = -ldl -lglfw -pthread -lm
+
 
 # ---------------- RULES ----------------
 all: $(LIBFT) $(MLX_LIB) $(NAME)
 
-$(NAME): $(OBJCS) $(LIBFT) $(MLX_LIB) yakuza.h
-	$(CC) $(CFLAGS) $(OBJCS) $(LIBFT) $(MLX_LIB) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(MLX_FLAGS)
+$(NAME): $(OBJCS) $(LIBFT) $(MLX_LIB) include/yakuza.h
+	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS)
+
+# 	$(CC) $(CFLAGS) $(OBJCS) $(LIBFT) $(MLX_LIB) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(MLX_FLAGS)
 
 $(LIBFT):
 	make -C $(DIR_LIB)

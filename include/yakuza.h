@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yakuza.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/03 21:54:35 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/04 14:51:54 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 # include <string.h>
 # include <sys/time.h>
 # include <fcntl.h>
-# include "libft/libft.h"
-# include <MLX42/MLX42.h>
+# include "../libft/libft.h"
+# include "../MLX42/include/MLX42/MLX42.h"
 
 #define WIDTH 1900
 #define HEIGHT 900
@@ -45,7 +45,23 @@ typedef struct s_rgb
 	int			b;
 }				t_rgb;
 
-int	keypress_hook(int keycode, void *mlx, void *win);
-int	close_win(void *mlx, void *win);
+typedef struct s_wall
+{
+	xpm_t   *north;
+    xpm_t   *south;
+    xpm_t   *east;
+    xpm_t   *west;
+} t_wall;
+
+// init_mlx.c 
+void	init_mlx(mlx_t    **mlx);
+
+// colors.c
+void     init_color(t_rgb *(*floor), t_rgb *(*ceiling));
+int		 rgb(int r, int g, int b);
+
+// // events.c
+void	keypress_hook(mlx_key_data_t keycode, void *mlx);
+void	close_win(void *mlx);
 
 #endif

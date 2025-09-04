@@ -6,36 +6,26 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:57:03 by modat             #+#    #+#             */
-/*   Updated: 2025/09/02 12:16:19 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/04 14:33:45 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yakuza.h"
 
 
-int	close_win(void *mlx, void *win)
+void	close_win(void *mlx)
 {
-	// mlx_destroy_image(mlx, img.img);
-	mlx_clear_window(mlx, win);
-	mlx_destroy_window(mlx, win);
-	mlx_destroy_display(mlx);
-	free(mlx);
-	// free(fractol);
+	mlx_t 	*mlx_tmp = (mlx_t *)mlx;
+	mlx_close_window(mlx_tmp);
+	mlx_terminate(mlx_tmp);
 	exit(0);
-	return (0);
 }
 
-int	keypress_hook(int keycode, void *mlx, void *win)
+void	keypress_hook(mlx_key_data_t keycode, void *mlx)
 {
-	if (keycode == ESC_KEY)
+	if (keycode.key == MLX_KEY_ESCAPE)
 	{
-		// mlx_destroy_image(mlx, img.img);
-		mlx_clear_window(mlx, win);
-		//mlx_destroy_window(mlx, win);
-		mlx_destroy_display(mlx);
-		free(mlx);
-		// free(fractol);
+		close_win(mlx);
 		exit(0);
 	}
-	return (0);
 }
