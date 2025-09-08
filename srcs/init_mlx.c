@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 10:07:17 by modat             #+#    #+#             */
-/*   Updated: 2025/09/04 15:05:44 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/07 10:03:49 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,40 +25,53 @@ void	init_mlx(mlx_t    **mlx)
 }
 
 // func - 2
-void	draw_img(mlx_t *mlx, t_rgb *draw, mlx_image_t *img, char fc)
+void	draw_img(mlx_t *mlx, t_rgb *draw, char fc)
 {
-		// Create and display the image.
+	mlx_image_t* img;
+	
 	if (fc == 'c')
 	{
-		mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT / 2);
+		img = mlx_new_image(mlx, WIDTH, HEIGHT);
 		if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
-			return(1);
+			return ;
 	}
 	else if (fc == 'f')
 	{
-		mlx_image_t* img = mlx_new_image(mlx, WIDTH, HEIGHT);
-		int upper = 0;
+		img = mlx_new_image(mlx, WIDTH, HEIGHT);
 		if (!img || (mlx_image_to_window(mlx, img, 0, HEIGHT / 2) < 0))
-			return(1);
+			return ;
 	}
-    int x = 0;
-    int y = 0;
-	// Even after the image is being displayed, we can still modify the buffer.
-	while (x < WIDTH)
-    {
-        y = 0;
-        while (y < HEIGHT)
-        {
-            mlx_put_pixel(img, x, y, rgb(draw->r, draw->g, draw->b));
-            y++;
-        }
-        x++;        
-    }
+	color_it(img, draw, fc);
 }
 
 // func - 3
-void 	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling, mlx_image_t *img)
+void 	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling)
 {
-
+	// (void)ceiling;
+	draw_img(mlx, floor, 'f');
+	draw_img(mlx, ceiling, 'c');
 }
 
+// func - 4
+void 	color_it(mlx_image_t* img, t_rgb *draw, char fc)
+{
+	int x;
+	int y;
+	int	height;
+
+	x = 0;
+	y = 0;
+	height = 0;
+	while (x < WIDTH)
+	{
+		y = 0;
+		if (fc == 'c')
+			height = HEIGHT / 2;
+		while (y < height)
+		{
+			mlx_put_pixel(img, x, y, rgb(draw->r, draw->g, draw->b));
+			y++; 
+		}
+		x++;
+	}
+}
