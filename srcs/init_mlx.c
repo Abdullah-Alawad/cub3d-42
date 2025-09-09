@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_mlx.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 10:07:17 by modat             #+#    #+#             */
-/*   Updated: 2025/09/07 10:03:49 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/09 07:42:27 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	draw_img(mlx_t *mlx, t_rgb *draw, char fc)
 	}
 	color_it(img, draw, fc);
 }
+
 
 // func - 3
 void 	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling)

@@ -4,17 +4,20 @@ CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -g3
 NAME = yakuza
 
 SRC_DIR = srcs
-SRC_FILES = main colors events init_mlx 
-INC_DIR = include
+GNL_DIR = gnl
+GNL_SRCS = get_next_line 
+SRC_FILES = print_struct main colors parsing parsing_utils error_handling init_map
+INC_DIR = includes
 
-SRCS =  $(addsuffix .c, $(addprefix $(SRC_DIR)/, $(SRC_FILES))) 
+SRCS =  $(addsuffix .c, $(addprefix $(SRC_DIR)/, $(SRC_FILES))) \
+		$(addsuffix .c, $(addprefix $(GNL_DIR)/, $(GNL_SRCS)))
 OBJCS = $(SRCS:.c=.o)
 
-# ---------------- LIBFT ----------------
+
 DIR_LIB = ./libft
 LIBFT = $(DIR_LIB)/libft.a
 
-# ---------------- MLX42 ----------------
+
 DIR_MLX = ./MLX42
 MLX_LIB = $(DIR_MLX)/build/libmlx42.a
 MLX_INC = -I$(DIR_MLX)/include
@@ -22,11 +25,11 @@ MLX_FLAGS = -L/usr/local/lib -ldl -lglfw -pthread -lm
 # MLX_FLAGS = -ldl -lglfw -pthread -lm
 
 
-# ---------------- RULES ----------------
 all: $(LIBFT) $(MLX_LIB) $(NAME)
 
-$(NAME): $(OBJCS) $(LIBFT) $(MLX_LIB) include/yakuza.h
-	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS)
+$(NAME): $(OBJCS) $(LIBFT) $(MLX_LIB) includes/yakuza.h
+	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB)  $(LIBFT) 
+# 	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS)
 
 # 	$(CC) $(CFLAGS) $(OBJCS) $(LIBFT) $(MLX_LIB) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(MLX_FLAGS)
 
