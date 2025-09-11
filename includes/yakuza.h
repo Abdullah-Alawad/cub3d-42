@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/09 17:39:40 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 10:03:59 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,7 @@ typedef struct s_map
 {
 	int 	height;
 	int 	width;
+	int		player_count;
 	char 			**map;
 	t_rgb			*floor;
 	t_rgb			*ceiling;
@@ -81,7 +82,7 @@ int     is_floor_cieling(char *buf);
 int     is_map(char *buf);
 
 // parsing.c
-int     parsing_reading(int ac, char **av, t_map *map);
+int     parsing_reading(int ac, char **av, t_map **map);
 void    allocate_map(t_map **map);
 
 // // colors.c
@@ -95,6 +96,7 @@ void    allocate_map(t_map **map);
 
 // error_handling.c
 void    malloc_err(void);
+void    free_arr(char **arr);
 
 void print_map(t_map *m);
 

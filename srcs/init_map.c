@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:02:08 by modat             #+#    #+#             */
-/*   Updated: 2025/09/09 17:39:21 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 09:31:16 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void    get_width_buf(char *buf, t_map **map, char **map_buf)
     char    *tmp;
 
     b = ft_strtrim(buf, "\n");
-    
     if (!b)
         malloc_err();
     if (!(*map_buf))
@@ -52,14 +51,11 @@ void    get_width_buf(char *buf, t_map **map, char **map_buf)
 	if (!b)
 		malloc_err();
 	free(tmp);
-    // if ((*map_buf))
-    //     printf("%s\n", (*map_buf));
     tmp = ft_strjoin((*map_buf), b);
 	if (!tmp)
 		malloc_err();
+    free(*map_buf);
     (*map_buf) = tmp;
-    printf("%s", (*map_buf));
-    //join_strs(&map_buf, &b);
 	len = ft_strlen(b) - 1;
 	if ((*map)->width < len)
 		(*map)->width = len;
@@ -83,6 +79,8 @@ static void    add_color(t_rgb *draw, char *buf)
     k++;
     draw->b = ft_atoi(comb[k]);
     k++;
+    free(b);
+    free_arr(comb);
 }
 
 // func - 4

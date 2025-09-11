@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:29:28 by modat             #+#    #+#             */
-/*   Updated: 2025/09/09 17:02:28 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 09:37:29 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int     main(int ac, char **av)
     t_map   *map;
 
     allocate_map(&map);
-    if (parsing_reading(ac, av, map) == 0)
+    if (parsing_reading(ac, av, &map) == 1)
     {
         // error & free
         return (1);
