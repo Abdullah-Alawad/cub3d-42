@@ -6,12 +6,24 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:02:08 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 15:33:58 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 18:52:00 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yakuza.h"
 
+
+
+// func - 1
+void    init_map_buf(char **map_buf)
+{
+    if (!(*map_buf))
+    {
+        (*map_buf) = ft_strdup("");
+        if (!(*map_buf))
+            malloc_err();
+    }
+}
 
 // func - 2
 void	get_width_buf(char *buf, t_map **map, char **map_buf)
@@ -23,12 +35,7 @@ void	get_width_buf(char *buf, t_map **map, char **map_buf)
 	b = ft_strtrim(buf, "\n");
 	if (!b)
 		malloc_err();
-	if (!(*map_buf))
-	{
-		(*map_buf) = ft_strdup("");
-		if (!(*map_buf))
-			malloc_err();
-	}
+	init_map_buf(map_buf);
 	tmp = b;
 	b = ft_strjoin(b, "\n");
 	if (!b)
@@ -42,6 +49,7 @@ void	get_width_buf(char *buf, t_map **map, char **map_buf)
 	len = ft_strlen(b) - 1;
 	if ((*map)->width < len)
 		(*map)->width = len;
+	check_line(map, b);
 	free(b);
 }
 
@@ -78,3 +86,7 @@ void	set_color(char *buf, t_map **map)
 		add_color((*map)->ceiling, buf);
 	}
 }
+
+// func - 5
+
+

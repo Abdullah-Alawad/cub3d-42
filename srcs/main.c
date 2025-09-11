@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:29:28 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 09:37:29 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 18:45:01 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,11 @@ int	main(int ac, char **av)
 		// error & free
 		return (1);
 	}
+	if (map->player_count != 1)
+    {
+        printf("players numbers is incorrect\n");
+        exit(1);
+    }
 	print_map(map);
 	// mlx_t    *mlx;
 	// init_mlx(&mlx);

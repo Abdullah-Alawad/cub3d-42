@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:05:51 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 14:30:38 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 18:56:54 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,4 +52,45 @@ int	is_map(char *buf)
 		i++;
 	}
 	return (0);
+}
+
+// func - 4
+static void    check_allowed_space(char *line, int i)
+{   
+	if (i > 0)
+    {
+        if (line[i - 1] == '0')
+        {
+			perror("space in mid of map");
+			exit_free();
+		}
+    }
+    i++;
+    while(line[i] == ' ')
+        i++;
+    if (line[i] != '1' && line[i] != '\n')
+    {
+		perror("space in wrong place");
+		exit_free();
+	}
+}
+
+// func - 5
+void    check_line(t_map **map, char *line)
+{
+    int i;
+
+    i = 0;
+    while (line[i])
+    {
+        if (line[i] != '1' && line[i] != '0' && line[i] != 'N' && line[i] != '\n'
+            && line[i] != 'S' && line[i] != 'E' && line[i] != 'W' && line[i] != ' ')
+            exit_free();
+        if (line[i] == ' ')
+            check_allowed_space(line, i);
+        if (line[i] == 'N' || line[i] == 'S' 
+            || line[i] == 'E' || line[i] == 'W')
+            (*map)->player_count++;
+        i++;
+    }
 }

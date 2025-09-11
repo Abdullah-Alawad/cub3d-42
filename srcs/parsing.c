@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:48:09 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/11 15:46:27 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 19:02:12 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	allocate_map(t_map **map)
 		malloc_err();
 	(*map)->width = 0;
 	(*map)->height = 0;
+	(*map)->player_count = 0; 
 }
 
 // func - 2
@@ -46,24 +47,24 @@ static void	set_path(char *buf, t_map **map)
 	if (buf[i] == 'N')
 	{
 		(*map)->wall->north = ft_strtrim(&buf[i + 2], " /r/n/t");
-		printf("%s\n", (*map)->wall->north);
-		is_path_valid((*map)->wall->north); // free north 
+		// printf("%s\n", (*map)->wall->north);
+		// is_path_valid((*map)->wall->north); // free north 
 	}
 	else if (buf[i] == 'S')
 	{
 		(*map)->wall->south = ft_strtrim(&buf[i + 2], " /r/n/t");
-		printf("%s\n", (*map)->wall->south);
-		is_path_valid((*map)->wall->south); // free north 
+		// printf("%s\n", (*map)->wall->south);
+		// is_path_valid((*map)->wall->south); // free north 
 	}
 	else if (buf[i] == 'W')
 	{
 		(*map)->wall->west = ft_strtrim(&buf[i + 2], " /r/n/t");
-		is_path_valid((*map)->wall->west); // free north 
+		// is_path_valid((*map)->wall->west); // free north 
 	}
 	else if (buf[i] == 'E')
 	{
 		(*map)->wall->east = ft_strtrim(&buf[i + 2], " /r/n/t");
-		is_path_valid((*map)->wall->east); // free north 
+		// is_path_valid((*map)->wall->east); // free north 
 	}
 }
 
@@ -95,11 +96,8 @@ int	parsing_reading(int ac, char **av, t_map **map)
 	static char	*map_buf = NULL;
 	int			fd;
 	char		*buf;
-
 	if (ac != 2)
-	{
-		return (1);
-	}
+		return (1); // TODO:free
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
@@ -115,6 +113,7 @@ int	parsing_reading(int ac, char **av, t_map **map)
 		buf = get_next_line(fd);
 	}
 	init_map(map, map_buf);
+	map_check((*map)->map, (*map)->height);
 	free(map_buf);
 	close(fd);
 	free(buf);

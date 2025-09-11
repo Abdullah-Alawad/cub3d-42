@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 15:27:19 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 19:02:26 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,8 @@ void    set_color(char *buf, t_map **map);
 // parsing_utils.c
 int     is_direction(char *buf);
 int     is_floor_cieling(char *buf);
-// void    allocate_map(t_map **map)
 int     is_map(char *buf);
+void    check_line(t_map **map, char *line);
 
 // parsing.c
 int     parsing_reading(int ac, char **av, t_map **map);
@@ -102,10 +102,11 @@ void 	exit_free(void);
 // map_validation_check.c
 int     is_map_valid(char *buf);
 int     is_path_valid(char *buf);
-// int     is_space_newline(char *str);
-// int     not_a_space_newline(char *str);
-// int     is_colors_valid(int nbr);
 void     is_colors_checker(char **comb, t_rgb **draw);
+
+// map_validation_check_2.c
+void 	map_check(char **map, int height);
+
 
 void print_map(t_map *m);
 
