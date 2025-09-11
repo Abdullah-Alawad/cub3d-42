@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:48:09 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/11 19:02:12 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 20:34:58 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	init_map(t_map **map, char *map_buf)
 	}
 	(*map)->map = ft_split(map_buf, '\n');
 	if (!(*map)->map)
-		malloc_err();
+		malloc_err(); // TODO: close fd in case of fail in map close map.cub
 }
 
 // func - 3
@@ -47,24 +47,23 @@ static void	set_path(char *buf, t_map **map)
 	if (buf[i] == 'N')
 	{
 		(*map)->wall->north = ft_strtrim(&buf[i + 2], " /r/n/t");
-		// printf("%s\n", (*map)->wall->north);
-		// is_path_valid((*map)->wall->north); // free north 
+		is_path_valid((*map)->wall->north); // free north 
+		
 	}
 	else if (buf[i] == 'S')
 	{
 		(*map)->wall->south = ft_strtrim(&buf[i + 2], " /r/n/t");
-		// printf("%s\n", (*map)->wall->south);
-		// is_path_valid((*map)->wall->south); // free north 
+		is_path_valid( (*map)->wall->south); // free north 
 	}
 	else if (buf[i] == 'W')
 	{
 		(*map)->wall->west = ft_strtrim(&buf[i + 2], " /r/n/t");
-		// is_path_valid((*map)->wall->west); // free north 
+		is_path_valid((*map)->wall->west); // free north 
 	}
 	else if (buf[i] == 'E')
 	{
 		(*map)->wall->east = ft_strtrim(&buf[i + 2], " /r/n/t");
-		// is_path_valid((*map)->wall->east); // free north 
+		is_path_valid((*map)->wall->east); // free north 
 	}
 }
 

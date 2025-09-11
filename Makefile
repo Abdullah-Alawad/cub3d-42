@@ -6,8 +6,8 @@ NAME = yakuza
 SRC_DIR = srcs
 GNL_DIR = gnl
 GNL_SRCS = get_next_line 
-SRC_FILES = print_struct main colors parsing parsing_utils error_handling init_map \
-	map_validation_check map_validation_check_2
+SRC_FILES = print_struct yakuza colors parsing parsing_utils error_handling init_map \
+	map_validation_check map_validation_check_2 events init_mlx
 INC_DIR = includes
 
 SRCS =  $(addsuffix .c, $(addprefix $(SRC_DIR)/, $(SRC_FILES))) \
@@ -29,10 +29,9 @@ MLX_FLAGS = -L/usr/local/lib -ldl -lglfw -pthread -lm
 all: $(LIBFT) $(MLX_LIB) $(NAME)
 
 $(NAME): $(OBJCS) $(LIBFT) $(MLX_LIB) includes/yakuza.h
-	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB)  $(LIBFT) 
-# 	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS)
-
+	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS)
 # 	$(CC) $(CFLAGS) $(OBJCS) $(LIBFT) $(MLX_LIB) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(MLX_FLAGS)
+# 	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB)  $(LIBFT) 
 
 $(LIBFT):
 	make -C $(DIR_LIB)

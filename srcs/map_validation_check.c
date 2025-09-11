@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 12:59:57 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 15:35:05 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 20:24:48 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static int     is_newline(char *buf)
 int     is_path_valid(char *buf)
 {
     int fd;
-
+    int len = strlen(buf);
+    buf[len -1 ]= 0;    
     fd = open(buf, O_RDONLY);
     if (fd == -1)
     {

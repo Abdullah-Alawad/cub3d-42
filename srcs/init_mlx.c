@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 10:07:17 by modat             #+#    #+#             */
-/*   Updated: 2025/09/09 07:42:27 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 20:54:14 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,15 @@ void	init_mlx(mlx_t **mlx)
 // func - 2
 void	draw_img(mlx_t *mlx, t_rgb *draw, char fc)
 {
-	mlx_image_t	*img;
+	mlx_image_t	*img = NULL;
 
-	if (fc == 'c')
+	if (fc == 'C')
 	{
 		img = mlx_new_image(mlx, WIDTH, HEIGHT);
 		if (!img || (mlx_image_to_window(mlx, img, 0, 0) < 0))
 			return ;
 	}
-	else if (fc == 'f')
+	else if (fc == 'F')
 	{
 		img = mlx_new_image(mlx, WIDTH, HEIGHT);
 		if (!img || (mlx_image_to_window(mlx, img, 0, HEIGHT / 2) < 0))
@@ -47,9 +47,8 @@ void	draw_img(mlx_t *mlx, t_rgb *draw, char fc)
 // func - 3
 void	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling)
 {
-	// (void)ceiling;
-	draw_img(mlx, floor, 'f');
-	draw_img(mlx, ceiling, 'c');
+	draw_img(mlx, floor, 'F');
+	draw_img(mlx, ceiling, 'C');
 }
 
 // func - 4

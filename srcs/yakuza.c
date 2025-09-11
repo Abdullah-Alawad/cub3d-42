@@ -5,55 +5,62 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/09/01 12:08:28 by modat             #+#    #+#             */
-/*   Updated: 2025/09/02 08:53:43 by modat            ###   ########.fr       */
+/*   Created: 2025/09/02 11:29:28 by modat             #+#    #+#             */
+/*   Updated: 2025/09/11 20:49:31 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yakuza.h"
 
-int	not_valid_file(char *file)
-{
-	int		len;
-	int		i;
-	char	ext[4];
+/*
+TODO :
+- fix it to start from parsing and reading.
+- init the inputs and allocate memory for each struct I will make.
+- test it and ensure it is assigning correctly.
+- it is fine to do a little parsing.
 
-	len = ft_strlen(file);
-	i = 0;
-	while (i < 4 && len >= 0)
-	{
-		ext[i] = file[len - 1];
-		len--;
-		i++;
-	}
-	ft_putstr_fd(ext, 1);
-	if (ft_strncmp(ext, "buc.", ft_strlen(ext)) == 0)
-		return (0);
-	return (1);
-}
+*/
+// void    load_textures(t_wall **news)
+// {
+//     (*news) = malloc(sizeof(t_wall));
+//     if (!*news)
+//     {
+//         // free
+//         exit(0);
+//     }
+//     (*news)->north = mlx_load_xpm42("./wall.xpm42");
+//     if (!(*news)->north)
+//         printf("path error\n");
+//     (*news)->south = mlx_load_xpm42("texture/wall.xpm42");
+//     (*news)->east = mlx_load_xpm42("texture/wall_window.xpm42");
+//     (*news)->west = mlx_load_xpm42("texture/wall.xpm42");
+// }
 
 int	main(int ac, char **av)
 {
-	if (ac != 2)
-	{
-		strerror(-1);
-		return (1);
-	}
-	if (not_valid_file(av[1]))
-	{
-		strerror(-1);
-		return (1);
-	}
-	ft_putstr_fd("passed\n", 1);
-	int fd = open(av[1], O_RDONLY);
-	if (fd < 0)
-	{
-		strerror(-1);
-		return (1);
-	}
+	t_map *map;
 
-	// 1) parsing inputs
-	// 2) map
-	// 2.1
-	// 3)
+	allocate_map(&map);
+	if (parsing_reading(ac, av, &map) == 1)
+	{
+		// error & free
+		return (1);
+	}
+	if (map->player_count != 1)
+    {
+        printf("players numbers is incorrect\n");
+        exit(1);
+    }
+	print_map(map);
+	mlx_t    *mlx;
+	init_mlx(&mlx);
+	set_ceiling_floor(mlx, map->floor, map->ceiling);
+	// init_map(map, fd, ac, av);
+	/* Do stuff */
+
+	mlx_key_hook(mlx, keypress_hook, mlx);
+	mlx_close_hook(mlx, close_win, mlx);
+	mlx_loop(mlx);
+	mlx_terminate(mlx);
+	return (0);
 }

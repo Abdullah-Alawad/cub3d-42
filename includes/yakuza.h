@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 19:02:26 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 20:51:56 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,9 @@ typedef struct s_map
 } t_map;
 
 // // init_mlx.c 
-// void	init_mlx(mlx_t    **mlx);
-// void	draw_img(mlx_t *mlx, t_rgb *draw, char fc);
-// void 	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling);
+void	init_mlx(mlx_t    **mlx);
+void	draw_img(mlx_t *mlx, t_rgb *draw, char fc);
+void 	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling);
 // void    init_map(t_map *map, int fd, int ac, char **av);
 
 // init_map.c
@@ -86,13 +86,13 @@ int     parsing_reading(int ac, char **av, t_map **map);
 void    allocate_map(t_map **map);
 
 // // colors.c
-// // void     init_color(t_rgb *(*floor), t_rgb *(*ceiling));
-// int		 rgb(int r, int g, int b);
-// void 	color_it(mlx_image_t* img, t_rgb *draw, char fc);
+// void     init_color(t_rgb *(*floor), t_rgb *(*ceiling));
+int		 rgb(int r, int g, int b);
+void	color_it(mlx_image_t *img, t_rgb *draw, char fc);
 
-// // events.c
-// void	keypress_hook(mlx_key_data_t keycode, void *mlx);
-// void	close_win(void *mlx);
+// events.c
+void	keypress_hook(mlx_key_data_t keycode, void *mlx);
+void	close_win(void *mlx);
 
 // error_handling.c
 void    malloc_err(void);
