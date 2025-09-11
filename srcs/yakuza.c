@@ -14,12 +14,12 @@
 
 int	not_valid_file(char *file)
 {
-	int 	len;
+	int		len;
 	int		i;
 	char	ext[4];
 
 	len = ft_strlen(file);
-	i = 0;	
+	i = 0;
 	while (i < 4 && len >= 0)
 	{
 		ext[i] = file[len - 1];
@@ -52,8 +52,8 @@ int	main(int ac, char **av)
 		return (1);
 	}
 
-    // 1) parsing inputs
-    // 2) map
-            // 2.1
-    // 3)
+	// 1) parsing inputs
+	// 2) map
+	// 2.1
+	// 3)
 }

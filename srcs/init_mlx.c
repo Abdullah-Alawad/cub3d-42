@@ -13,22 +13,22 @@
 #include "yakuza.h"
 
 // func -1
-void	init_mlx(mlx_t    **mlx)
+void	init_mlx(mlx_t **mlx)
 {
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	(*mlx) = mlx_init(WIDTH, HEIGHT, "YAKUZA", true);
 	if (!(*mlx))
 	{
-        strerror(mlx_errno);
-        return ;
-    }
+		strerror(mlx_errno);
+		return ;
+	}
 }
 
 // func - 2
 void	draw_img(mlx_t *mlx, t_rgb *draw, char fc)
 {
-	mlx_image_t* img;
-	
+	mlx_image_t	*img;
+
 	if (fc == 'c')
 	{
 		img = mlx_new_image(mlx, WIDTH, HEIGHT);
@@ -44,9 +44,8 @@ void	draw_img(mlx_t *mlx, t_rgb *draw, char fc)
 	color_it(img, draw, fc);
 }
 
-
 // func - 3
-void 	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling)
+void	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling)
 {
 	// (void)ceiling;
 	draw_img(mlx, floor, 'f');
@@ -54,10 +53,10 @@ void 	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling)
 }
 
 // func - 4
-void 	color_it(mlx_image_t* img, t_rgb *draw, char fc)
+void	color_it(mlx_image_t *img, t_rgb *draw, char fc)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 	int	height;
 
 	x = 0;
@@ -71,7 +70,7 @@ void 	color_it(mlx_image_t* img, t_rgb *draw, char fc)
 		while (y < height)
 		{
 			mlx_put_pixel(img, x, y, rgb(draw->r, draw->g, draw->b));
-			y++; 
+			y++;
 		}
 		x++;
 	}

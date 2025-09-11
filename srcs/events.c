@@ -12,10 +12,11 @@
 
 #include "yakuza.h"
 
-
 void	close_win(void *mlx)
 {
-	mlx_t 	*mlx_tmp = (mlx_t *)mlx;
+	mlx_t	*mlx_tmp;
+
+	mlx_tmp = (mlx_t *)mlx;
 	mlx_close_window(mlx_tmp);
 	mlx_terminate(mlx_tmp);
 	exit(0);

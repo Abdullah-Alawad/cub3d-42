@@ -6,7 +6,8 @@ NAME = yakuza
 SRC_DIR = srcs
 GNL_DIR = gnl
 GNL_SRCS = get_next_line 
-SRC_FILES = print_struct main colors parsing parsing_utils error_handling init_map
+SRC_FILES = print_struct main colors parsing parsing_utils error_handling init_map \
+	map_validation_check
 INC_DIR = includes
 
 SRCS =  $(addsuffix .c, $(addprefix $(SRC_DIR)/, $(SRC_FILES))) \

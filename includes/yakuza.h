@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 10:03:59 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/11 15:27:19 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,6 +97,15 @@ void    allocate_map(t_map **map);
 // error_handling.c
 void    malloc_err(void);
 void    free_arr(char **arr);
+void 	exit_free(void);
+
+// map_validation_check.c
+int     is_map_valid(char *buf);
+int     is_path_valid(char *buf);
+// int     is_space_newline(char *str);
+// int     not_a_space_newline(char *str);
+// int     is_colors_valid(int nbr);
+void     is_colors_checker(char **comb, t_rgb **draw);
 
 void print_map(t_map *m);
 

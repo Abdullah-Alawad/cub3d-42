@@ -36,25 +36,25 @@ TODO :
 //     (*news)->west = mlx_load_xpm42("texture/wall.xpm42");
 // }
 
-int     main(int ac, char **av)
+int	main(int ac, char **av)
 {
-    t_map   *map;
+	t_map *map;
 
-    allocate_map(&map);
-    if (parsing_reading(ac, av, &map) == 1)
-    {
-        // error & free
-        return (1);
-    }
-    print_map(map);
-    // mlx_t    *mlx;
-    // init_mlx(&mlx);
-    // init_map(map, fd, ac, av);
+	allocate_map(&map);
+	if (parsing_reading(ac, av, &map) == 1)
+	{
+		// error & free
+		return (1);
+	}
+	print_map(map);
+	// mlx_t    *mlx;
+	// init_mlx(&mlx);
+	// init_map(map, fd, ac, av);
 	// /* Do stuff */
-    
-    // mlx_key_hook(mlx, keypress_hook, mlx);
-    // mlx_close_hook(mlx, close_win, mlx);
+
+	// mlx_key_hook(mlx, keypress_hook, mlx);
+	// mlx_close_hook(mlx, close_win, mlx);
 	// mlx_loop(mlx);
-    // mlx_terminate(mlx);
-    return (0);
+	// mlx_terminate(mlx);
+	return (0);
 }
