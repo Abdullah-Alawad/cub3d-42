@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:29:28 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 20:49:31 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/12 16:30:46 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,31 +36,29 @@ TODO :
 //     (*news)->west = mlx_load_xpm42("texture/wall.xpm42");
 // }
 
+void	 setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
+{
+	init_tokugawa_sokoku(&(*yakuza));
+	setting_map(&(*yakuza)->map, av, ac);
+	set_ceiling_floor((*yakuza)->mlx, (*yakuza)->map->floor, (*yakuza)->map->ceiling);
+	init_minimap(&(*yakuza));
+}
 int	main(int ac, char **av)
 {
-	t_map *map;
-
-	allocate_map(&map);
-	if (parsing_reading(ac, av, &map) == 1)
-	{
-		// error & free
-		return (1);
-	}
-	if (map->player_count != 1)
-    {
-        printf("players numbers is incorrect\n");
-        exit(1);
-    }
-	print_map(map);
-	mlx_t    *mlx;
-	init_mlx(&mlx);
-	set_ceiling_floor(mlx, map->floor, map->ceiling);
-	// init_map(map, fd, ac, av);
+	t_tokugawa_sokoku *yakuza;
+	
+	setup_config(&yakuza, av, ac);
+	minimap(yakuza->minimap, yakuza->map->map);
+	
+	// start_the_game
+	// enter_tokugawa_sokoku(yakuza);
+	
+	// print_map(yakuza->map);
 	/* Do stuff */
-
-	mlx_key_hook(mlx, keypress_hook, mlx);
-	mlx_close_hook(mlx, close_win, mlx);
-	mlx_loop(mlx);
-	mlx_terminate(mlx);
+// rendering 
+	mlx_key_hook(yakuza->mlx, keypress_hook, yakuza->mlx);
+	mlx_close_hook(yakuza->mlx, close_win, yakuza->mlx);
+	mlx_loop(yakuza->mlx);
+	mlx_terminate(yakuza->mlx);
 	return (0);
 }

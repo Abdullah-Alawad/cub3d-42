@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:02:08 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 18:52:00 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/12 12:42:54 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,5 +88,17 @@ void	set_color(char *buf, t_map **map)
 }
 
 // func - 5
-
-
+void 	setting_map(t_map **map, char **av, int ac)
+{
+	allocate_map(map);
+	if (parsing_reading(ac, av, map) == 1)
+	{
+		// error & free
+		exit_free();
+	}
+	if ((*map)->player_count != 1)
+    {
+        printf("players numbers is incorrect\n");
+        exit_free();
+    }
+}

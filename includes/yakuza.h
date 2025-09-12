@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/12 10:23:22 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/12 17:07:36 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,23 @@
 
 #define WIDTH 1900
 #define HEIGHT 900
-# define ESC_KEY 65307
-# define CLOSE 17
+
+# define MINI_WIDTH 1900/3
+# define MINI_HEIGHT 900/3 
+// # define ESC_KEY 6307
+// # define CLOSE 17
 
 # define ZOOM_FACTOR 1.1
 # define PAN_FACTOR 0.1
 # define MOVE_SPEED 0.1
 # define MAX_ITER 200
 
-# define KEY_ESC 65307
-# define KEY_LEFT 65361
-# define KEY_RIGHT 65363
-# define KEY_UP 65362
-# define KEY_DOWN 65364
-# define PALETTE_SIZE 16
+// # define KEY_ESC 65307
+// # define KEY_LEFT 65361
+// # define KEY_RIGHT 65363
+// # define KEY_UP 65362
+// # define KEY_DOWN 65364
+// # define PALETTE_SIZE 16
 
 typedef struct s_rgb
 {
@@ -54,11 +57,20 @@ typedef struct s_wall_path
     char   *west;
 } t_wall_path;
 
+typedef struct s_minimap
+{
+	int 	h;
+	int 	w;
+	mlx_image_t 	*miniimg;
+	// t_kumicho	*kumicho;
+} t_minimap;
+
 // typedef struct	s_kumicho
 // {
+// 	mlx_image_t *imag_minimap;
+// 	double angle;
 // 	double h_offset;
 // 	double w_offset;
-// 	double kumicho;
 // } t_kumicho;
 
 typedef struct s_map
@@ -73,25 +85,27 @@ typedef struct s_map
 	t_wall_path 	*wall;
 } t_map;
 
-// typedef s_tokugawa_sokoku
-// {
-// 	t_minimap *minimap;
-// 	double h_offset;
-// 	double	w_offset;
-// 	t_map	*map;
-// 	t_kumicho 	*kumicho;
-	
-// } t_tokugawa_sokoku;
+typedef struct s_tokugawa_sokoku
+{
+	t_minimap *minimap;
+	// double h_offset;
+	// double	w_offset;
+	mlx_image_t	*img;
+	t_map	*map;
+	mlx_t 	*mlx;
+	// t_kumicho 	*kumicho;
+} t_tokugawa_sokoku;
 
 // // init_mlx.c 
 void	init_mlx(mlx_t    **mlx);
 void	draw_img(mlx_t *mlx, t_rgb *draw, char fc);
 void 	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling);
-// void    init_map(t_map *map, int fd, int ac, char **av);
+
 
 // init_map.c
 void    get_width_buf(char *buf, t_map **map, char **map_buf);
 void    set_color(char *buf, t_map **map);
+void 	setting_map(t_map **map, char **av, int ac);
 
 // parsing_utils.c
 int     is_direction(char *buf);
@@ -104,8 +118,7 @@ int     parsing_reading(int ac, char **av, t_map **map);
 void    allocate_map(t_map **map);
 
 // // colors.c
-// void     init_color(t_rgb *(*floor), t_rgb *(*ceiling));
-int		 rgb(int r, int g, int b);
+int		rgb(int r, int g, int b);
 void	color_it(mlx_image_t *img, t_rgb *draw, char fc);
 
 // events.c
@@ -125,6 +138,14 @@ void     is_colors_checker(char **comb, t_rgb **draw);
 // map_validation_check_2.c
 void 	map_check(char **map, int height);
 
+// init_tokugawa.c
+void 	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza);
+void 	init_minimap(t_tokugawa_sokoku **yakuza);
+// tokugawa_sokoku.c
+
+
+// minimap.c
+void    minimap(t_minimap *minimap, char **map);
 
 void print_map(t_map *m);
 
