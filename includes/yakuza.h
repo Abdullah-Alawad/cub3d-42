@@ -59,6 +59,7 @@ typedef struct s_map
 	int 	height;
 	int 	width;
 	int		player_count;
+	char	player_direction;
 	char 			**map;
 	t_rgb			*floor;
 	t_rgb			*ceiling;

@@ -37,6 +37,9 @@ void print_map(t_map *m)
         printf("Ceiling color: R:%d G:%d B:%d\n",
                m->ceiling->r, m->ceiling->g, m->ceiling->b);
 
+    if (m->player_direction)
+            printf("player direction: %c\n", m->player_direction);
+
     if (m->wall) {
         printf("\nWall textures:\n");
         if (m->wall->north) printf("  North: %s\n", m->wall->north);

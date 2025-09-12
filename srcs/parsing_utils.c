@@ -90,7 +90,10 @@ void    check_line(t_map **map, char *line)
             check_allowed_space(line, i);
         if (line[i] == 'N' || line[i] == 'S' 
             || line[i] == 'E' || line[i] == 'W')
-            (*map)->player_count++;
+			{
+            	(*map)->player_count++;
+				(*map)->player_direction = line[i];
+			}
         i++;
     }
 }

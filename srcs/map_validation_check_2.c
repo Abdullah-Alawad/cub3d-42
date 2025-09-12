@@ -65,7 +65,8 @@ static void 	up_down(char **map, int height)
         len = ft_strlen(map[h]);
         while (w < len)
         {
-    		if (map[h][w] == '0')
+    		if (map[h][w] == '0' || map[h][w] == 'N' || map[h][w] == 'S'
+                || map[h][w] == 'E' || map[h][w] == 'W')
 		    {
 	    	    if ((map[h - 1][w] == ' ') || (map[h + 1][w] == ' '))
 		        {
