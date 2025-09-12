@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 20:51:56 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/12 10:23:22 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,13 @@ typedef struct s_wall_path
     char   *west;
 } t_wall_path;
 
+// typedef struct	s_kumicho
+// {
+// 	double h_offset;
+// 	double w_offset;
+// 	double kumicho;
+// } t_kumicho;
+
 typedef struct s_map
 {
 	int 	height;
@@ -65,6 +72,16 @@ typedef struct s_map
 	t_rgb			*ceiling;
 	t_wall_path 	*wall;
 } t_map;
+
+// typedef s_tokugawa_sokoku
+// {
+// 	t_minimap *minimap;
+// 	double h_offset;
+// 	double	w_offset;
+// 	t_map	*map;
+// 	t_kumicho 	*kumicho;
+	
+// } t_tokugawa_sokoku;
 
 // // init_mlx.c 
 void	init_mlx(mlx_t    **mlx);
