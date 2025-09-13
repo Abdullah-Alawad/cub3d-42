@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/12 17:07:36 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/13 16:16:47 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,26 +21,16 @@
 # include "../libft/libft.h"
 # include "../MLX42/include/MLX42/MLX42.h"
 # include "../includes/get_next_line.h"
+# include <math.h>
 
 #define WIDTH 1900
 #define HEIGHT 900
 
-# define MINI_WIDTH 1900/3
-# define MINI_HEIGHT 900/3 
-// # define ESC_KEY 6307
-// # define CLOSE 17
+# define MINI_WIDTH 1900/5  // norm error
+# define MINI_HEIGHT 900/5	// norm error
 
-# define ZOOM_FACTOR 1.1
-# define PAN_FACTOR 0.1
 # define MOVE_SPEED 0.1
-# define MAX_ITER 200
-
-// # define KEY_ESC 65307
-// # define KEY_LEFT 65361
-// # define KEY_RIGHT 65363
-// # define KEY_UP 65362
-// # define KEY_DOWN 65364
-// # define PALETTE_SIZE 16
+# define ROT_SPEED 0.05
 
 typedef struct s_rgb
 {
@@ -59,19 +49,28 @@ typedef struct s_wall_path
 
 typedef struct s_minimap
 {
-	int 	h;
-	int 	w;
+	float 	h;
+	float 	w;
 	mlx_image_t 	*miniimg;
 	// t_kumicho	*kumicho;
 } t_minimap;
 
-// typedef struct	s_kumicho
-// {
-// 	mlx_image_t *imag_minimap;
-// 	double angle;
-// 	double h_offset;
-// 	double w_offset;
-// } t_kumicho;
+typedef struct	s_coords
+{
+	double	w; // x
+	double	h; //y
+}	t_coords;
+
+typedef struct	s_kumicho
+{
+	mlx_image_t *imag_minimap;
+	mlx_image_t	*img; // init needed
+	t_coords	offset;
+	t_coords	direction;
+	t_coords	plane;
+	double		angle;
+	char		dir;
+} t_kumicho;
 
 typedef struct s_map
 {
@@ -85,21 +84,26 @@ typedef struct s_map
 	t_wall_path 	*wall;
 } t_map;
 
+typedef struct s_mouse 
+{
+	int32_t x;
+	int32_t y;
+} t_mouse;
+
 typedef struct s_tokugawa_sokoku
 {
 	t_minimap *minimap;
 	// double h_offset;
 	// double	w_offset;
+	t_mouse 	*mouse;
 	mlx_image_t	*img;
 	t_map	*map;
 	mlx_t 	*mlx;
-	// t_kumicho 	*kumicho;
+	t_kumicho 	*kumicho;
 } t_tokugawa_sokoku;
 
 // // init_mlx.c 
-void	init_mlx(mlx_t    **mlx);
-void	draw_img(mlx_t *mlx, t_rgb *draw, char fc);
-void 	set_ceiling_floor(mlx_t *mlx, t_rgb *floor, t_rgb *ceiling);
+// void	draw_img(mlx_t *mlx, t_rgb *draw, char fc);
 
 
 // init_map.c
@@ -118,12 +122,16 @@ int     parsing_reading(int ac, char **av, t_map **map);
 void    allocate_map(t_map **map);
 
 // // colors.c
-int		rgb(int r, int g, int b);
+uint32_t		rgb(int r, int g, int b);
 void	color_it(mlx_image_t *img, t_rgb *draw, char fc);
+void 	set_ceiling_floor(t_tokugawa_sokoku **yakuza);
+
 
 // events.c
 void	keypress_hook(mlx_key_data_t keycode, void *mlx);
 void	close_win(void *mlx);
+void	keys_hook(mlx_key_data_t keycode, t_tokugawa_sokoku *yakuza);
+void	mouse_hook(t_mouse *xy,  t_tokugawa_sokoku *yakuza, mlx_t *mlx);
 
 // error_handling.c
 void    malloc_err(void);
@@ -133,7 +141,7 @@ void 	exit_free(void);
 // map_validation_check.c
 int     is_map_valid(char *buf);
 int     is_path_valid(char *buf);
-void     is_colors_checker(char **comb, t_rgb **draw);
+void    is_colors_checker(char **comb, t_rgb **draw);
 
 // map_validation_check_2.c
 void 	map_check(char **map, int height);
@@ -145,8 +153,21 @@ void 	init_minimap(t_tokugawa_sokoku **yakuza);
 
 
 // minimap.c
-void    minimap(t_minimap *minimap, char **map);
+void    minimap(t_minimap *minimap, t_map *map);
 
 void print_map(t_map *m);
+
+// movements.c
+void    forward(t_tokugawa_sokoku *yakuza);
+void    backward(t_tokugawa_sokoku *yakuza);
+void    left(t_tokugawa_sokoku *yakuza);
+void    right(t_tokugawa_sokoku *yakuza);
+
+// rotaion.c
+void    rotate_right(t_tokugawa_sokoku *yakuza, double rotation_speed);
+void    rotate_left(t_tokugawa_sokoku *yakuza, double rotation_speed);
+
+// void mlx_get_mouse_pos(mlx_t* mlx, int32_t* x, int32_t* y);
+// void mlx_mouse_hook(mlx_t* mlx, mlx_mousefunc func, void* param);
 
 #endif

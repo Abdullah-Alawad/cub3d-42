@@ -6,14 +6,14 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 10:07:17 by modat             #+#    #+#             */
-/*   Updated: 2025/09/12 17:41:09 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/13 15:20:34 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yakuza.h"
 
 // func -1
-void	init_mlx(mlx_t **mlx)
+static void	init_mlx(mlx_t **mlx)
 {
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	(*mlx) = mlx_init(WIDTH, HEIGHT, "YAKUZA", true);
@@ -25,15 +25,6 @@ void	init_mlx(mlx_t **mlx)
 }
 
 // func - 2
-// static void 	init_kumicho(t_kumicho **kumicho)
-// {
-// 	(*kumicho) = malloc(sizeof(t_kumicho));
-// 	if (!(*kumicho))
-// 		malloc_err();
-// 	(*kumicho)->h_offset = 0;
-// 	(*kumicho)->w_offset = 0;
-		
-// }
 void 	init_minimap(t_tokugawa_sokoku **yakuza)
 {
 	(*yakuza)->minimap = malloc(sizeof(t_minimap));
@@ -47,17 +38,41 @@ void 	init_minimap(t_tokugawa_sokoku **yakuza)
 }
 
 // func - 3
+static void 	init_mouse(t_mouse **mouse, mlx_t *mlx)
+{
+	(*mouse) = malloc(sizeof(t_mouse));
+	if (!(*mouse))
+		malloc_err();
+	mlx_get_mouse_pos(mlx, &(*mouse)->x, &(*mouse)->y);
+}
+
+// func - 4
+void	init_kumicho(t_tokugawa_sokoku **yakuza)
+{
+	(*yakuza)->kumicho = malloc(sizeof(t_kumicho));
+	if (!(*yakuza)->kumicho)
+		malloc_err();
+	(*yakuza)->kumicho->offset.w = 0.0;
+	(*yakuza)->kumicho->offset.h = 0.0;
+	(*yakuza)->kumicho->direction.w = 0.0;
+	(*yakuza)->kumicho->direction.h = 0.0;
+	(*yakuza)->kumicho->plane.w = 0.0;
+	(*yakuza)->kumicho->plane.h = 0.0;
+	(*yakuza)->kumicho->angle = 0.0;
+}
+
+// func - 5
 void 	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza)
 {
 	(*yakuza) = malloc(sizeof(t_tokugawa_sokoku));
 	if (!(*yakuza))
 		malloc_err();
-	// init_kumicho(&(*yakuza)->kumicho);
+
 	init_mlx(&(*yakuza)->mlx);
+	init_mouse(&(*yakuza)->mouse, (*yakuza)->mlx);
+	init_kumicho(&(*yakuza));
+	(*yakuza)->img = mlx_new_image((*yakuza)->mlx, WIDTH , HEIGHT);
+    if (!(*yakuza)->img || (mlx_image_to_window((*yakuza)->mlx, (*yakuza)->img, 0, 0) < 0))
+		return ;
 	init_minimap(&(*yakuza));
 }
-
-// func - 4
-
-// func - 5
-

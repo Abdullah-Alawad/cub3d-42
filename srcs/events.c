@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:57:03 by modat             #+#    #+#             */
-/*   Updated: 2025/09/12 14:51:29 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/13 16:22:03 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,28 +34,41 @@ void	keypress_hook(mlx_key_data_t keycode, void *mlx)
 }
 
 // func - 3
-// int	handle_keys(mlx_key_data_t keycode, t_game *game)
-// {
-// 	int	new_y;
-// 	int	new_x;
-
-// 	// new_y = game->p_y;
-// 	// new_x = game->p_x;
-// 	// if (keycode.key == MLX_KEY_ESCAPE) // XK_Escape
-// 	// 	close_win(game);
-// 	if (keycode.key == MLX_KEY_LEFT || keycode.key == MLX_KEY_A)
-// 		new_x--;
-// 	else if (keycode.key == MLX_KEY_RIGHT || keycode.key == MLX_KEY_D)
-// 		new_x++;
-// 	else if (keycode.key == MLX_KEY_UP || keycode.key == MLX_KEY_W)
-// 		new_y--;
-// 	else if (keycode.key == MLX_KEY_DOWN || keycode.key == MLX_KEY_S)
-// 		new_y++;
-// 	// move_player(game, new_y, new_x);
-// 	return (0);
-// }
+void	handle_keys(mlx_key_data_t keycode, t_tokugawa_sokoku *yakuza)
+{
+	if (keycode.key == MLX_KEY_A)
+		left(yakuza);
+	else if (keycode.key == MLX_KEY_D)
+		right(yakuza);
+	else if (keycode.key == MLX_KEY_W)
+		forward(yakuza);
+	else if (keycode.key == MLX_KEY_S)
+		backward(yakuza);
+	else if (keycode.key == MLX_KEY_LEFT)
+		rotate_left(yakuza, ROT_SPEED);
+	else if (keycode.key == MLX_KEY_RIGHT)
+		rotate_right(yakuza, ROT_SPEED);
+}
 
 // func - 4 
+// void	mouse_hook(t_mouse *xy, t_tokugawa_sokoku *yakuza, mlx_t *mlx)
+// {
+// 	int32_t x;
+// 	int32_t y;
+// 	double 	rot;
+
+// 	mlx_get_mouse_pos(mlx, &x, &y);
+// 	rot = ROT_SPEED * (abs(xy->x - x));
+// 	// mlx_get_mouse_pos(mlx, &xy->x, &xy->y);
+// 	if (x > xy->x)
+// 		rotate_right(yakuza, rot);
+// 	else if (x < xy->x)
+// 		rotate_left(yakuza, rot);
+// 	mlx_cursor_hook(window, mouse_move_callback, &player);
+// mlx_set_cursor_mode(window, MLX_MOUSE_DISABLED); // Hide cursor and lock to window
+
+// 	printf("Mouse position: %d, %d\n", x, y);
+// }
 
 
 // func - 5

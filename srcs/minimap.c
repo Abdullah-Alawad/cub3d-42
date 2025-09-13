@@ -6,103 +6,57 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 10:53:20 by modat             #+#    #+#             */
-/*   Updated: 2025/09/12 17:50:02 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/13 09:41:42 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yakuza.h"
-
-static void    draw(t_minimap **minimap, uint32_t color, char fw)
-{   
-    int counterH;
-    int counterW;
-    
-    counterH = 0;
-    if ((*minimap)->h <  MINI_HEIGHT) // big loop
+static void    draw(t_minimap **minimap, uint32_t color, float ph, float pw)
+{
+    float w;
+    float h;
+    float wCopy = (*minimap)->w;
+    float hCopy = (*minimap)->h;
+    h = 0.0;
+    while ((float)h < ph)
     {
-        (*minimap)->w = 0;
-        if ((*minimap)->w  < MINI_WIDTH) // big loop
+        wCopy = (*minimap)->w;
+        w = 0.0;
+        while ((float)w < pw)
         {
-            while ((counterH < (MINI_HEIGHT * 4)/10)) // small loop
-            {
-                // (*minimap)->w = 0;
-                counterW = 0;
-                while ( counterW < (MINI_WIDTH * 4)/10) // smal loop
-                {
-                    if (fw == '1')
-                        mlx_put_pixel((*minimap)->miniimg, (*minimap)->w, (*minimap)->h, color);
-                    else if (fw == '0')
-                        mlx_put_pixel((*minimap)->miniimg, (*minimap)->w, (*minimap)->h, color);
-                    else
-                        mlx_put_pixel((*minimap)->miniimg, (*minimap)->w, (*minimap)->h, color);
-                    (*minimap)->w++;
-                    counterW++;
-                    if (counterW == (MINI_WIDTH * 4)/10)
-                        break ;
-                    }
-                (*minimap)->h++;
-                counterH++;
-                if (counterH == (MINI_HEIGHT * 4)/10)
-                    break ;
-                }
-            continue ;
-
-                // break ;
-        // (*minimap)->w++;
-            }
-    // (*minimap)->h++;
-            continue ;
+            mlx_put_pixel((*minimap)->miniimg, wCopy, hCopy, color);
+            w++;
+            wCopy++;
         }
+        h++;
+        hCopy++;
     }
-    // counterH = 0;
-    // while ((*minimap)->h < 20/3)
-    // {
-    //     (*minimap)->w = 0;
-    //     counterW = 0;
-    //     while ((*minimap)->w < 20/3)
-    //     {
-    //         if (fw == '1')
-    //             mlx_put_pixel((*minimap)->miniimg, (*minimap)->w, (*minimap)->h, color);
-    //         else if (fw == '0')
-    //             mlx_put_pixel((*minimap)->miniimg, (*minimap)->w, (*minimap)->h, color);
-    //         else
-    //             mlx_put_pixel((*minimap)->miniimg, (*minimap)->w, (*minimap)->h, color);
-    //         (*minimap)->w++;
-    //         if (counterW == 20)
-    //             break ;
-    //     }
-    //     (*minimap)->h++;
-    //     counterH++;
-    //     if (counterH == 20)
-    //         break ;
-    // }
-// }
-
-void    minimap(t_minimap *minimap, char **map)
+}
+void    minimap(t_minimap *minimap, t_map *map)
 {
     int h;
     int w;
-
+    float pixelSizeW = (float)MINI_WIDTH / map->width;
+    float pixelSizeH = (float)MINI_HEIGHT / map->height;
     h = 0;
-    while (map[h])
+   minimap->h = 0.0;
+    while (map->map[h])
     {
+      minimap->w = 0.0;
         w = 0;
-        while (map[h][w])
+        while (map->map[h][w])
         {
-            printf("w: %d, h: %d", minimap->w, minimap->h);
-            if (map[h][w] == '1')
-                draw(&minimap, 0xBBBBBBBB, map[h][w]);
-            if (map[h][w] == '0')
-                draw(&minimap, 0x00000000, map[h][w]);
-            else if (map[h][w] == ' ')
-                draw(&minimap, 0xDDDDDDDD, map[h][w]);
+            if (map->map[h][w] == '1')
+                draw(&minimap, 0xBBDDFBBB, pixelSizeW, pixelSizeH);
+            else if (map->map[h][w] == '0')
+                draw(&minimap, 0xFFFFFFFF, pixelSizeW, pixelSizeH);
+            else if (map->map[h][w] == 'N')
+                draw(&minimap, 0xFFFF000, pixelSizeW, pixelSizeH);
+            minimap->w += pixelSizeW;
             w++;
-            // minimap->w++;
         }
+        minimap->h += pixelSizeH;
         h++;
-        printf("\n");
-        // minimap->h++;
     }
 }
 
-// func - 2

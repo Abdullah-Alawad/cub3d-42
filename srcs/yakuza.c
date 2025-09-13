@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:29:28 by modat             #+#    #+#             */
-/*   Updated: 2025/09/12 16:30:46 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/13 16:22:13 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,15 +40,37 @@ void	 setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
 {
 	init_tokugawa_sokoku(&(*yakuza));
 	setting_map(&(*yakuza)->map, av, ac);
-	set_ceiling_floor((*yakuza)->mlx, (*yakuza)->map->floor, (*yakuza)->map->ceiling);
 	init_minimap(&(*yakuza));
+	set_ceiling_floor(&(*yakuza));
 }
+void	draw_background(t_minimap *minimap)
+{
+	int x;
+	int y;
+
+	x = 0;
+	while (x < MINI_HEIGHT)
+	{
+		y = 0;
+		while (y < MINI_WIDTH)
+		{
+			mlx_put_pixel(minimap->miniimg, y, x, 0xBBBBBBBB);
+			y++;
+		}
+		x++;
+	}
+}
+
 int	main(int ac, char **av)
 {
 	t_tokugawa_sokoku *yakuza;
 	
 	setup_config(&yakuza, av, ac);
-	minimap(yakuza->minimap, yakuza->map->map);
+	draw_background(yakuza->minimap);
+	minimap(yakuza->minimap, yakuza->map);
+	// xy ???
+	// mouse_hook(yakuza->mouse, yakuza, yakuza->mlx);
+
 	
 	// start_the_game
 	// enter_tokugawa_sokoku(yakuza);
