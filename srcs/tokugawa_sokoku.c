@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokugawa_sokoku.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:15:24 by modat             #+#    #+#             */
-/*   Updated: 2025/09/19 09:15:19 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/19 13:22:06 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,3 +19,12 @@ void    enter_tokugawa_sokoku(void *land)
 	// minimap(yakuza->minimap, yakuza->map);
 	map(yakuza);
 }
+
+/*
+player info:
+1 >> position on map >> translated  on wind
+2 >> direction cordinates
+3 >> plane coordinates
+
+h w + 0.5
+*/
