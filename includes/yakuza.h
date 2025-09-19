@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yakuza.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/17 06:56:31 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/19 09:09:19 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,6 +105,11 @@ typedef struct s_tokugawa_sokoku
 // // init_mlx.c 
 // void	draw_img(mlx_t *mlx, t_rgb *draw, char fc);
 
+// yakuza.c 
+void	 setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac);
+void	draw_background(t_minimap *minimap);
+void 	map_drawing(t_tokugawa_sokoku *yakuza, uint32_t color, int pw, int ph);
+void 	map(t_tokugawa_sokoku *yakuza);
 
 // init_map.c
 void    get_width_buf(char *buf, t_map **map, char **map_buf);
@@ -150,7 +155,7 @@ void 	map_check(char **map, int height);
 void 	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza);
 void 	init_minimap(t_tokugawa_sokoku **yakuza);
 // tokugawa_sokoku.c
-
+void    enter_tokugawa_sokoku(void *land);
 
 // minimap.c
 void    minimap(t_minimap *minimap, t_map *map);

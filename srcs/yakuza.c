@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yakuza.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:29:28 by modat             #+#    #+#             */
-/*   Updated: 2025/09/17 09:32:44 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/19 09:15:29 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	draw_background(t_minimap *minimap)
 
 
 
-static void 	map_drawing(t_tokugawa_sokoku *yakuza, uint32_t color, int pw, int ph)
+void 	map_drawing(t_tokugawa_sokoku *yakuza, uint32_t color, int pw, int ph)
 {
     int w;
     int h;
@@ -102,9 +102,9 @@ int	main(int ac, char **av)
 	t_tokugawa_sokoku *yakuza;
 	
 	setup_config(&yakuza, av, ac);
-	draw_background(yakuza->minimap);
+	// draw_background(yakuza->minimap);
 	minimap(yakuza->minimap, yakuza->map);
-	map(yakuza);
+	// map(yakuza);
 	// map_drawing(yakuza);
 	// xy ???
 	// mouse_hook(yakuza->mouse, yakuza, yakuza->mlx);
@@ -116,6 +116,7 @@ int	main(int ac, char **av)
 	// print_map(yakuza->map);
 	/* Do stuff */
 // rendering 
+	mlx_loop_hook(yakuza->mlx, enter_tokugawa_sokoku, yakuza);
 	mlx_key_hook(yakuza->mlx, keypress_hook, yakuza->mlx);
 	mlx_close_hook(yakuza->mlx, close_win, yakuza->mlx);
 	mlx_loop(yakuza->mlx);
