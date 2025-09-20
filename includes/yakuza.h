@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yakuza.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/19 13:55:35 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/20 18:31:17 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ typedef struct	s_coords
 typedef struct	s_kumicho
 {
 	mlx_image_t *imag_minimap;
-	mlx_image_t	*img; // init needed
+	// mlx_image_t	*img; // init needed
 	t_coords	offset;
 	t_coords	direction;
 	t_coords	plane;
@@ -154,6 +154,11 @@ void 	map_check(char **map, int height);
 // init_tokugawa.c
 void 	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza);
 void 	init_minimap(t_tokugawa_sokoku **yakuza);
+void	init_kumicho(t_tokugawa_sokoku **yakuza);
+
+// init_kumcho
+void 	init_kumicho_2(t_tokugawa_sokoku **yakuza);
+
 // tokugawa_sokoku.c
 void    enter_tokugawa_sokoku(void *land);
 

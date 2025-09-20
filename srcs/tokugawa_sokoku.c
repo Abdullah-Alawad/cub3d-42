@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tokugawa_sokoku.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:15:24 by modat             #+#    #+#             */
-/*   Updated: 2025/09/19 13:22:06 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/20 18:46:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,9 @@ void    enter_tokugawa_sokoku(void *land)
 {
     t_tokugawa_sokoku *yakuza = (t_tokugawa_sokoku *)land;
     draw_background(yakuza->minimap);
-	// minimap(yakuza->minimap, yakuza->map);
 	map(yakuza);
+	minimap(yakuza->minimap, yakuza->map);
+    // usleep(5000);
 }
 
 /*
