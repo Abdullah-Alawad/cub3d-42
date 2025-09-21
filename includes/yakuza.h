@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yakuza.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/20 18:31:17 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/21 15:59:45 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,14 +61,32 @@ typedef struct	s_coords
 	double	h; //y
 }	t_coords;
 
+
+typedef struct s_camera
+{
+    double camerax;
+    double ray_dirx;
+    double ray_diry;
+	int mapx;
+	int mapy;
+	double delta_disx;
+	double delta_disy;
+	int     stepx;
+	int      stepy;
+	double side_disx;
+	double side_disy;
+    int side;
+	int	wall_starts;
+	int	wall_ends;
+} t_camera;
+
 typedef struct	s_kumicho
 {
-	mlx_image_t *imag_minimap;
+	// mlx_image_t *imag_minimap;
 	// mlx_image_t	*img; // init needed
 	t_coords	offset;
 	t_coords	direction;
 	t_coords	plane;
-	double		angle;
 	char		dir;
 } t_kumicho;
 
@@ -92,13 +110,12 @@ typedef struct s_mouse
 
 typedef struct s_tokugawa_sokoku
 {
-	t_minimap *minimap;
-	// double h_offset;
-	// double	w_offset;
-	t_mouse 	*mouse;
 	mlx_image_t	*img;
-	t_map	*map;
 	mlx_t 	*mlx;
+	t_minimap *minimap;
+	t_mouse 	*mouse;
+	t_map	*map;
+	t_camera *camera;
 	t_kumicho 	*kumicho;
 } t_tokugawa_sokoku;
 
@@ -177,6 +194,9 @@ void    right(t_tokugawa_sokoku *yakuza);
 void    rotate_right(t_tokugawa_sokoku *yakuza, double rotation_speed);
 void    rotate_left(t_tokugawa_sokoku *yakuza, double rotation_speed);
 
+
+ void    enter_tokugawa_sokoku(void *land);
+// void    init_camera(t_tokugawa_sokoku **yakuza, int x);
 // void mlx_get_mouse_pos(mlx_t* mlx, int32_t* x, int32_t* y);
 // void mlx_mouse_hook(mlx_t* mlx, mlx_mousefunc func, void* param);
 

@@ -6,11 +6,13 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 10:53:20 by modat             #+#    #+#             */
-/*   Updated: 2025/09/13 09:41:42 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/21 09:56:34 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yakuza.h"
+
+// func - 1
 static void    draw(t_minimap **minimap, uint32_t color, float ph, float pw)
 {
     float w;
@@ -32,6 +34,8 @@ static void    draw(t_minimap **minimap, uint32_t color, float ph, float pw)
         hCopy++;
     }
 }
+
+// func - 2
 void    minimap(t_minimap *minimap, t_map *map)
 {
     int h;
@@ -51,7 +55,7 @@ void    minimap(t_minimap *minimap, t_map *map)
             else if (map->map[h][w] == '0')
                 draw(&minimap, 0xFFFFFFFF, pixelSizeW, pixelSizeH);
             else if (map->map[h][w] == 'N')
-                draw(&minimap, 0xFFFF000, pixelSizeW, pixelSizeH);
+                draw(&minimap, 0xFF0000FF, pixelSizeW, pixelSizeH);
             minimap->w += pixelSizeW;
             w++;
         }

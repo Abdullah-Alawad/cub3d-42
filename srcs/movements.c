@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/13 11:16:43 by modat             #+#    #+#             */
-/*   Updated: 2025/09/13 11:19:41 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/21 09:58:56 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,10 @@ void    forward(t_tokugawa_sokoku *yakuza)
     new_offset.h = yakuza->kumicho->offset.h + (yakuza->kumicho->direction.h * MOVE_SPEED);
     if (yakuza->map->map[(int)new_offset.h][(int)new_offset.w] != '1')
     {
+        yakuza->map->map[(int)yakuza->kumicho->offset.h][(int)yakuza->kumicho->offset.w] = '0';
         yakuza->kumicho->offset.w = new_offset.w;
         yakuza->kumicho->offset.h = new_offset.h;
+        yakuza->map->map[(int)new_offset.h][(int)new_offset.w] = yakuza->map->player_direction;
     }
 }
 
@@ -35,8 +37,10 @@ void    backward(t_tokugawa_sokoku *yakuza)
     new_offset.h = yakuza->kumicho->offset.h - (yakuza->kumicho->direction.h * MOVE_SPEED);
     if (yakuza->map->map[(int)new_offset.h][(int)new_offset.w] != '1')
     {
+        yakuza->map->map[(int)yakuza->kumicho->offset.h][(int)yakuza->kumicho->offset.w] = '0';
         yakuza->kumicho->offset.w = new_offset.w;
         yakuza->kumicho->offset.h = new_offset.h;
+        yakuza->map->map[(int)new_offset.h][(int)new_offset.w] = yakuza->map->player_direction;
     }
 }
 
@@ -49,8 +53,10 @@ void    left(t_tokugawa_sokoku *yakuza)
     new_offset.h = yakuza->kumicho->offset.h - (yakuza->kumicho->plane.h * MOVE_SPEED);
     if (yakuza->map->map[(int)new_offset.h][(int)new_offset.w] != '1')
     {
+        yakuza->map->map[(int)yakuza->kumicho->offset.h][(int)yakuza->kumicho->offset.w] = '0';
         yakuza->kumicho->offset.w = new_offset.w;
         yakuza->kumicho->offset.h = new_offset.h;
+        yakuza->map->map[(int)new_offset.h][(int)new_offset.w] = yakuza->map->player_direction;
     }
 }
 
@@ -63,7 +69,9 @@ void    right(t_tokugawa_sokoku *yakuza)
     new_offset.h = yakuza->kumicho->offset.h + (yakuza->kumicho->plane.h * MOVE_SPEED);
     if (yakuza->map->map[(int)new_offset.h][(int)new_offset.w] != '1')
     {
+        yakuza->map->map[(int)yakuza->kumicho->offset.h][(int)yakuza->kumicho->offset.w] = '0';
         yakuza->kumicho->offset.w = new_offset.w;
         yakuza->kumicho->offset.h = new_offset.h;
+        yakuza->map->map[(int)new_offset.h][(int)new_offset.w] = yakuza->map->player_direction;
     }
 }

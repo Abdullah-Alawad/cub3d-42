@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_tokugawa.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 10:07:17 by modat             #+#    #+#             */
-/*   Updated: 2025/09/20 18:30:01 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/21 16:02:17 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	init_kumicho(t_tokugawa_sokoku **yakuza)
 	if (!(*yakuza)->kumicho)
 		malloc_err();
 	init_kumicho_2(&(*yakuza));
-	(*yakuza)->kumicho->angle = 0.0;
+
 }
 
 // func - 5
@@ -68,5 +68,6 @@ void 	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza)
 	(*yakuza)->img = mlx_new_image((*yakuza)->mlx, WIDTH , HEIGHT);
     if (!(*yakuza)->img || (mlx_image_to_window((*yakuza)->mlx, (*yakuza)->img, 0, 0) < 0))
 		return ;
-	init_minimap(&(*yakuza));
+	// init_kumicho(&(*yakuza));
+	// init_minimap(&(*yakuza));
 }
