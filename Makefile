@@ -1,14 +1,14 @@
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -I$(INC_DIR) -g3
 
-NAME = yakuza
+NAME = cub3D
 
 SRC_DIR = srcs
 GNL_DIR = gnl
 GNL_SRCS = get_next_line 
 SRC_FILES = print_struct yakuza colors parsing parsing_utils error_handling init_map \
 	map_validation_check map_validation_check_2 events  minimap tokugawa_sokoku init_tokugawa \
-	movements rotation init_kumicho
+	movements rotation init_kumicho flood_fill
 INC_DIR = includes
 
 SRCS =  $(addsuffix .c, $(addprefix $(SRC_DIR)/, $(SRC_FILES))) \

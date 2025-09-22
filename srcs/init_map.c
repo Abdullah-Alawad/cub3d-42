@@ -6,13 +6,11 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:02:08 by modat             #+#    #+#             */
-/*   Updated: 2025/09/12 12:42:54 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/22 15:16:32 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yakuza.h"
-
-
 
 // func - 1
 void    init_map_buf(char **map_buf)
@@ -87,6 +85,22 @@ void	set_color(char *buf, t_map **map)
 	}
 }
 
+// void	print_cpy(char **map, int height)
+// {
+// 	int width;
+	
+// 	// printf("Map (%d):\n", height);
+//     for (int y = 0; y < height; y++)
+//     {
+// 		width = ft_strlen(map[y]);
+//         for (int x = 0; x < width; x++)
+//         {
+//             printf("%c", map[y][x]);
+//         }
+//         printf("\n");
+//     }
+// }
+
 // func - 5
 void 	setting_map(t_map **map, char **av, int ac)
 {
@@ -101,4 +115,5 @@ void 	setting_map(t_map **map, char **av, int ac)
         printf("players numbers is incorrect\n");
         exit_free();
     }
+
 }

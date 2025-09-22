@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/21 15:59:45 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/22 15:16:44 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,14 @@ typedef struct s_rgb
 	int			g;
 	int			b;
 }				t_rgb;
+
+typedef struct	s_news_tex
+{
+	mlx_texture_t *north;
+	mlx_texture_t *south;
+	mlx_texture_t *east;
+	mlx_texture_t *west;
+}	t_news_tex;
 
 typedef struct s_wall_path
 {
@@ -78,6 +86,7 @@ typedef struct s_camera
     int side;
 	int	wall_starts;
 	int	wall_ends;
+	double player_to_wall_dis;
 } t_camera;
 
 typedef struct	s_kumicho
@@ -97,6 +106,7 @@ typedef struct s_map
 	int		player_count;
 	char	player_direction;
 	char 			**map;
+	// char			**cpy_map;
 	t_rgb			*floor;
 	t_rgb			*ceiling;
 	t_wall_path 	*wall;
@@ -117,6 +127,7 @@ typedef struct s_tokugawa_sokoku
 	t_map	*map;
 	t_camera *camera;
 	t_kumicho 	*kumicho;
+	t_news_tex	*texture;
 } t_tokugawa_sokoku;
 
 // // init_mlx.c 
@@ -199,5 +210,12 @@ void    rotate_left(t_tokugawa_sokoku *yakuza, double rotation_speed);
 // void    init_camera(t_tokugawa_sokoku **yakuza, int x);
 // void mlx_get_mouse_pos(mlx_t* mlx, int32_t* x, int32_t* y);
 // void mlx_mouse_hook(mlx_t* mlx, mlx_mousefunc func, void* param);
+
+// flood_fill.c
+// void	copy_map(t_map **map);
+
+
+// void	print_cpy(char **map, int height);
+
 
 #endif

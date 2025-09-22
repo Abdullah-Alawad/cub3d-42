@@ -1,7 +1,7 @@
-NO  ./texture/wall_window.xpm42
-SO  ./texture/wall.xpm42
-WE  ./texture/wall_window.xpm42
-EA  ./texture/wall.xpm42
+NO  ./texture/wall_window.png
+SO  ./texture/wall.png
+WE  ./texture/wall_window.png
+EA  ./texture/wall.png
 
 F 164,116,73
 C 137,207,240
@@ -20,4 +20,3 @@ C 137,207,240
 110000011101010111110111100111
 11110111 1110101 101111010001
 11111111 1111111 111111111111
-

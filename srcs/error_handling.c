@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 07:51:56 by modat             #+#    #+#             */
-/*   Updated: 2025/09/11 15:20:21 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/22 09:48:42 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 void	malloc_err(void)
 {
 	perror("malloc");
-	return ;
+	exit(EXIT_FAILURE);
 }
 
 // func - 2

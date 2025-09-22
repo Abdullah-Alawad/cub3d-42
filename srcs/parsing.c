@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:48:09 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/11 20:34:58 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/22 15:16:06 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ static void	init_map(t_map **map, char *map_buf)
 	(*map)->map = ft_split(map_buf, '\n');
 	if (!(*map)->map)
 		malloc_err(); // TODO: close fd in case of fail in map close map.cub
+	// copy_map(&(*map));
 }
 
 // func - 3

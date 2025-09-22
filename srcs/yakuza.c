@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:29:28 by modat             #+#    #+#             */
-/*   Updated: 2025/09/21 16:02:29 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/22 15:16:37 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,37 @@ TODO :
 
 */
 
+void 	init_texture(t_tokugawa_sokoku **yakuza)
+{
+	(*yakuza)->texture = malloc(sizeof(t_news_tex));
+    if (!(*yakuza)->texture)
+    {
+        perror("xpm");
+        return ;
+    }
+	// char s[20] = ft_strtrim();
+	(*yakuza)->texture->north = mlx_load_png("texture/wall.png");
+	(*yakuza)->texture->south = mlx_load_png("texture/wall_window.png");
+	(*yakuza)->texture->east = mlx_load_png("texture/wall.png");
+	(*yakuza)->texture->west = mlx_load_png("texture/wall_window.png");
+
+
+	if (!(*yakuza)->texture->north || !(*yakuza)->texture->east || !(*yakuza)->texture->south || !(*yakuza)->texture->west)
+	{
+    	fprintf(stderr, "Texture not loaded!\n");
+    	return ;
+	}
+}
+
 void	 setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
 {
 	init_tokugawa_sokoku(&(*yakuza));
 	setting_map(&(*yakuza)->map, av, ac);
 	// set_ceiling_floor(&(*yakuza));
+	// print_cpy((*yakuza)->map->cpy_map, (*yakuza)->map->height);
+	
+	init_texture(&(*yakuza));
+	
 	init_kumicho(&(*yakuza));
 	(*yakuza)->camera = malloc(sizeof(t_camera));
 	if (!(*yakuza)->camera)
@@ -52,37 +78,12 @@ void	draw_background(t_minimap *minimap)
 	}
 }
 
-
-
-void 	map_drawing(t_tokugawa_sokoku *yakuza, uint32_t color, int pw, int ph)
-{
-    int w;
-    int h;
-    int wCopy = yakuza->map->width;
-    int hCopy = yakuza->map->height;
-    h = 0;
-    while (h < ph)
-    {
-        wCopy = yakuza->map->width;
-        w = 0;
-        while (w < pw)
-        {
-			mlx_put_pixel(yakuza->img, wCopy, hCopy, color);
-            w++;
-            wCopy++;
-        }
-        h++;
-        hCopy++;
-    }
-}
-
 int	main(int ac, char **av)
 {
 	t_tokugawa_sokoku *yakuza;
 	
 	setup_config(&yakuza, av, ac);
-
-
+	
 	
 	// mouse_hook(yakuza->mouse, yakuza, yakuza->mlx);
 	mlx_close_hook(yakuza->mlx, close_win, yakuza->mlx);
