@@ -114,13 +114,12 @@ int	parsing_reading(int ac, char **av, t_map **map)
 	}
 	init_map(map, map_buf);
 	save_player_positions(map);
-	printf("player x: %d\nplayer y: %d\n", (*map)->px, (*map)->py);
 	if (flood_fill((*map), (*map)->py, (*map)->px) == 0)
 	{
 		printf("map not closed\n");
 		exit(1);
 	}
-	// map_check((*map)->map, (*map)->height);
+	// map_check((*map)->map, (*map)->height);  NOTE: I think we don't need this function now
 	free(map_buf);
 	close(fd);
 	free(buf);

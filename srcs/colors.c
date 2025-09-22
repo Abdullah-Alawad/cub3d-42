@@ -67,10 +67,10 @@ void	color_floor(mlx_image_t *img, mlx_texture_t *floor)
 // func - 2
 void	set_ceiling_floor(t_tokugawa_sokoku **yakuza)
 {
-	// color_it((*yakuza)->img, (*yakuza)->map->ceiling, 'C');
-	color_ceiling((*yakuza)->img, (*yakuza)->sky);
-	color_floor((*yakuza)->img, (*yakuza)->grass);
-	// color_it((*yakuza)->img, (*yakuza)->map->floor, 'F');
+	// color_it((*yakuza)->img, (*yakuza)->map->ceiling, 'C'); // ceiling cloor
+	color_ceiling((*yakuza)->img, (*yakuza)->sky);			   // ceiling image
+	color_floor((*yakuza)->img, (*yakuza)->grass);			   // floor image
+	// color_it((*yakuza)->img, (*yakuza)->map->floor, 'F');   // floor color
 }
 
 // func - 3

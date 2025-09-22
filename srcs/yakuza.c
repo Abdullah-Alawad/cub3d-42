@@ -47,10 +47,7 @@ void	 setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
 {
 	init_tokugawa_sokoku(&(*yakuza));
 	setting_map(&(*yakuza)->map, av, ac);
-	// set_ceiling_floor(&(*yakuza));
-	print_cpy((*yakuza)->map->cpy_map, (*yakuza)->map->height);
-	print_cpy((*yakuza)->map->map, (*yakuza)->map->height);
-	/*   sky and grass*/
+	/*   sky and grass  v v v v*/
 	(*yakuza)->sky = mlx_load_png("texture/sky.png");
 	if (!(*yakuza)->sky)
         fprintf(stderr, "Failed to load PNG!\n");
@@ -58,14 +55,13 @@ void	 setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
 	(*yakuza)->grass = mlx_load_png("texture/grass.png");
 	if (!(*yakuza)->grass)
         fprintf(stderr, "Failed to load PNG!\n");
-
+	/*  ^ ^ ^ ^ comment between lines 50 and 58 to remove floor ceiling images, set_ceiling_floor function will need some changes as well */
 	init_texture(&(*yakuza));
 	init_kumicho(&(*yakuza));
 	(*yakuza)->camera = malloc(sizeof(t_camera));
 	if (!(*yakuza)->camera)
 		malloc_err();
 	init_minimap(&(*yakuza));
-	// init_camera(&(*yakuza), 0);
 }
 
 void	draw_background(t_minimap *minimap)
