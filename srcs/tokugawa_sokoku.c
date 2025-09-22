@@ -64,6 +64,7 @@ void    init_camera(t_tokugawa_sokoku **yakuza, int x)
     
 }
 
+
 void    dis_to_wall(t_tokugawa_sokoku **yakuza)
 {
     // 6) start map logic, measure (side_disx/y, mapx/y, side) then check if it is a wall or not
@@ -104,7 +105,10 @@ void    find_wall_height(t_tokugawa_sokoku **yakuza)
         player_to_wall_dis = ((*yakuza)->camera->mapx - (*yakuza)->kumicho->offset.w + (1 - (*yakuza)->camera->stepx) / 2) / (*yakuza)->camera->ray_dirx;
     else    // hit y, y values
         player_to_wall_dis = ((*yakuza)->camera->mapy - (*yakuza)->kumicho->offset.h + (1 - (*yakuza)->camera->stepy) / 2) / (*yakuza)->camera->ray_diry; 
-    
+    // if (player_to_wall_dis <= 0.6)
+    // {
+    //     player_to_wall_dis = 0.6 ;
+    // }
     (*yakuza)->camera->player_to_wall_dis = player_to_wall_dis;
     // 8) wall_length_on_win_h
     wall_len = ((int)HEIGHT / player_to_wall_dis);
@@ -214,7 +218,6 @@ static void    raycasting(t_tokugawa_sokoku **yakuza)
     if (mlx_is_key_down(yakuza->mlx, MLX_KEY_RIGHT))
         rotate_right(yakuza, ROT_SPEED);
     
-    draw_background(yakuza->minimap);
     set_ceiling_floor(&(yakuza));
     raycasting(&yakuza);
 	minimap(yakuza->minimap, yakuza->map);

@@ -85,21 +85,21 @@ void	set_color(char *buf, t_map **map)
 	}
 }
 
-// void	print_cpy(char **map, int height)
-// {
-// 	int width;
+void	print_cpy(char **map, int height)
+{
+	int width;
 	
-// 	// printf("Map (%d):\n", height);
-//     for (int y = 0; y < height; y++)
-//     {
-// 		width = ft_strlen(map[y]);
-//         for (int x = 0; x < width; x++)
-//         {
-//             printf("%c", map[y][x]);
-//         }
-//         printf("\n");
-//     }
-// }
+	// printf("Map (%d):\n", height);
+    for (int y = 0; y < height; y++)
+    {
+		width = ft_strlen(map[y]);
+        for (int x = 0; x < width; x++)
+        {
+            printf("%c", map[y][x]);
+        }
+        printf("\n");
+    }
+}
 
 // func - 5
 void 	setting_map(t_map **map, char **av, int ac)

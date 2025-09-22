@@ -24,10 +24,10 @@
 # include <math.h>
 
 #define WIDTH 1900
-#define HEIGHT 900
+#define HEIGHT 1000
 
 # define MINI_WIDTH 1900/5  // norm error
-# define MINI_HEIGHT 900/5	// norm error
+# define MINI_HEIGHT 1000/5	// norm error
 
 # define MOVE_SPEED 0.1
 # define ROT_SPEED 0.05
@@ -106,7 +106,9 @@ typedef struct s_map
 	int		player_count;
 	char	player_direction;
 	char 			**map;
-	// char			**cpy_map;
+	char			**cpy_map;
+	int				px;
+	int				py;
 	t_rgb			*floor;
 	t_rgb			*ceiling;
 	t_wall_path 	*wall;
@@ -128,6 +130,8 @@ typedef struct s_tokugawa_sokoku
 	t_camera *camera;
 	t_kumicho 	*kumicho;
 	t_news_tex	*texture;
+	mlx_texture_t	*sky;
+	mlx_texture_t	*grass;
 } t_tokugawa_sokoku;
 
 // // init_mlx.c 
@@ -212,10 +216,12 @@ void    rotate_left(t_tokugawa_sokoku *yakuza, double rotation_speed);
 // void mlx_mouse_hook(mlx_t* mlx, mlx_mousefunc func, void* param);
 
 // flood_fill.c
-// void	copy_map(t_map **map);
+void	copy_map(t_map **map);
+int 	flood_fill(t_map *map, int py, int px);
+void    save_player_positions(t_map **map);
 
 
-// void	print_cpy(char **map, int height);
+void	print_cpy(char **map, int height);
 
 
 #endif

@@ -36,7 +36,7 @@ static void	init_map(t_map **map, char *map_buf)
 	(*map)->map = ft_split(map_buf, '\n');
 	if (!(*map)->map)
 		malloc_err(); // TODO: close fd in case of fail in map close map.cub
-	// copy_map(&(*map));
+	copy_map(&(*map));
 }
 
 // func - 3
@@ -113,7 +113,14 @@ int	parsing_reading(int ac, char **av, t_map **map)
 		buf = get_next_line(fd);
 	}
 	init_map(map, map_buf);
-	map_check((*map)->map, (*map)->height);
+	save_player_positions(map);
+	printf("player x: %d\nplayer y: %d\n", (*map)->px, (*map)->py);
+	if (flood_fill((*map), (*map)->py, (*map)->px) == 0)
+	{
+		printf("map not closed\n");
+		exit(1);
+	}
+	// map_check((*map)->map, (*map)->height);
 	free(map_buf);
 	close(fd);
 	free(buf);

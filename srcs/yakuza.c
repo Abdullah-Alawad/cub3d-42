@@ -48,10 +48,18 @@ void	 setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
 	init_tokugawa_sokoku(&(*yakuza));
 	setting_map(&(*yakuza)->map, av, ac);
 	// set_ceiling_floor(&(*yakuza));
-	// print_cpy((*yakuza)->map->cpy_map, (*yakuza)->map->height);
+	print_cpy((*yakuza)->map->cpy_map, (*yakuza)->map->height);
+	print_cpy((*yakuza)->map->map, (*yakuza)->map->height);
+	/*   sky and grass*/
+	(*yakuza)->sky = mlx_load_png("texture/sky.png");
+	if (!(*yakuza)->sky)
+        fprintf(stderr, "Failed to load PNG!\n");
 	
+	(*yakuza)->grass = mlx_load_png("texture/grass.png");
+	if (!(*yakuza)->grass)
+        fprintf(stderr, "Failed to load PNG!\n");
+
 	init_texture(&(*yakuza));
-	
 	init_kumicho(&(*yakuza));
 	(*yakuza)->camera = malloc(sizeof(t_camera));
 	if (!(*yakuza)->camera)
