@@ -69,6 +69,11 @@ typedef struct	s_coords
 	double	h; //y
 }	t_coords;
 
+typedef struct	s_ints
+{
+	int	w; // x
+	int	h; //y
+}	t_ints;
 
 typedef struct s_camera
 {
