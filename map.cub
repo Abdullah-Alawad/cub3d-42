@@ -1,5 +1,5 @@
-NO  ./texture/wall_window.png
-SO  ./texture/wall.png
+NO  ./texture/tree.png
+SO  ./texture/perfect.png
 WE  ./texture/wall_window.png
 EA  ./texture/wall.png
 

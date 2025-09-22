@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:29:28 by modat             #+#    #+#             */
-/*   Updated: 2025/09/22 15:16:37 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/22 15:25:10 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,10 +30,10 @@ void 	init_texture(t_tokugawa_sokoku **yakuza)
         return ;
     }
 	// char s[20] = ft_strtrim();
-	(*yakuza)->texture->north = mlx_load_png("texture/wall.png");
-	(*yakuza)->texture->south = mlx_load_png("texture/wall_window.png");
-	(*yakuza)->texture->east = mlx_load_png("texture/wall.png");
-	(*yakuza)->texture->west = mlx_load_png("texture/wall_window.png");
+	(*yakuza)->texture->north = mlx_load_png((*yakuza)->map->wall->north);
+	(*yakuza)->texture->south = mlx_load_png((*yakuza)->map->wall->south);
+	(*yakuza)->texture->east = mlx_load_png((*yakuza)->map->wall->east);
+	(*yakuza)->texture->west = mlx_load_png((*yakuza)->map->wall->west);
 
 
 	if (!(*yakuza)->texture->north || !(*yakuza)->texture->east || !(*yakuza)->texture->south || !(*yakuza)->texture->west)
