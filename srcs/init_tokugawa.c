@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_tokugawa.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 10:07:17 by modat             #+#    #+#             */
-/*   Updated: 2025/09/21 16:02:17 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/23 18:31:37 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,9 @@ void 	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza)
 	(*yakuza) = malloc(sizeof(t_tokugawa_sokoku));
 	if (!(*yakuza))
 		malloc_err();
-
 	init_mlx(&(*yakuza)->mlx);
 	init_mouse(&(*yakuza)->mouse, (*yakuza)->mlx);
 	(*yakuza)->img = mlx_new_image((*yakuza)->mlx, WIDTH , HEIGHT);
     if (!(*yakuza)->img || (mlx_image_to_window((*yakuza)->mlx, (*yakuza)->img, 0, 0) < 0))
 		return ;
-	// init_kumicho(&(*yakuza));
-	// init_minimap(&(*yakuza));
 }

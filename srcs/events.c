@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:57:03 by modat             #+#    #+#             */
-/*   Updated: 2025/09/13 16:22:03 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/23 18:11:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	handle_keys(mlx_key_data_t keycode, t_tokugawa_sokoku *yakuza)
 		rotate_right(yakuza, ROT_SPEED);
 }
 
-// func - 4 
+// func - 4
 // void	mouse_hook(t_mouse *xy, t_tokugawa_sokoku *yakuza, mlx_t *mlx)
 // {
 // 	int32_t x;
@@ -65,11 +65,8 @@ void	handle_keys(mlx_key_data_t keycode, t_tokugawa_sokoku *yakuza)
 // 	else if (x < xy->x)
 // 		rotate_left(yakuza, rot);
 // 	mlx_cursor_hook(window, mouse_move_callback, &player);
-// mlx_set_cursor_mode(window, MLX_MOUSE_DISABLED); // Hide cursor and lock to window
+// mlx_set_cursor_mode(window, MLX_MOUSE_DISABLED);
+// Hide cursor and lock to window
 
 // 	printf("Mouse position: %d, %d\n", x, y);
 // }
-
-
-// func - 5
-

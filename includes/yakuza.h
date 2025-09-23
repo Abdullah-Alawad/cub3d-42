@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yakuza.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/22 15:16:44 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/23 18:52:46 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,8 +96,6 @@ typedef struct s_camera
 
 typedef struct	s_kumicho
 {
-	// mlx_image_t *imag_minimap;
-	// mlx_image_t	*img; // init needed
 	t_coords	offset;
 	t_coords	direction;
 	t_coords	plane;
@@ -145,8 +143,7 @@ typedef struct s_tokugawa_sokoku
 // yakuza.c 
 void	 setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac);
 void	draw_background(t_minimap *minimap);
-void 	map_drawing(t_tokugawa_sokoku *yakuza, uint32_t color, int pw, int ph);
-void 	map(t_tokugawa_sokoku *yakuza);
+
 
 // init_map.c
 void    get_width_buf(char *buf, t_map **map, char **map_buf);
