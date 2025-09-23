@@ -6,7 +6,7 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:16:01 by modat             #+#    #+#             */
-/*   Updated: 2025/09/23 18:16:49 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/23 23:24:55 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void	copy_map(t_map **map)
 }
 
 // func - 2
-int	check_flood(t_map *map, int py, int px)
+static int	check_flood(t_map *map, int py, int px)
 {
 	if (!flood_fill(map, py - 1, px))
 		return (0);
@@ -79,22 +79,6 @@ int	flood_fill(t_map *map, int py, int px)
 		return (0);
 	map->cpy_map[py][px] = 'X';
 	check_flood(map, py, px);
-	// if (!flood_fill(map, py - 1, px))
-	// 	return (0);
-	// if (!flood_fill(map, py + 1, px))
-	// 	return (0);
-	// if (!flood_fill(map, py, px - 1))
-	// 	return (0);
-	// if (!flood_fill(map, py, px + 1))
-	// 	return (0);
-	// if (!flood_fill(map, py - 1, px - 1))
-	// 	return (0);
-	// if (!flood_fill(map, py - 1, px + 1))
-	// 	return (0);
-	// if (!flood_fill(map, py + 1, px - 1))
-	// 	return (0);
-	// if (!flood_fill(map, py + 1, px + 1))
-	// 	return (0);
 	return (1);
 }
 

@@ -6,29 +6,35 @@
 /*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:57:03 by modat             #+#    #+#             */
-/*   Updated: 2025/09/23 18:11:34 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 00:04:51 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yakuza.h"
 
 // func - 1
-void	close_win(void *mlx)
+void	close_win(void *param)
 {
-	mlx_t	*mlx_tmp;
+	t_tokugawa_sokoku	*yakuza;
 
-	mlx_tmp = (mlx_t *)mlx;
-	mlx_close_window(mlx_tmp);
-	mlx_terminate(mlx_tmp);
+	yakuza = (t_tokugawa_sokoku *)param;
+	mlx_close_window(yakuza->mlx);
+	mlx_terminate(yakuza->mlx);
+	free_struct(yakuza);
 	exit(0);
 }
 
 // func - 2
-void	keypress_hook(mlx_key_data_t keycode, void *mlx)
+void	keypress_hook(mlx_key_data_t keycode, void *param)
 {
+	t_tokugawa_sokoku	*yakuza;
+
+	yakuza = (t_tokugawa_sokoku *)param;
 	if (keycode.key == MLX_KEY_ESCAPE)
 	{
-		close_win(mlx);
+		mlx_close_window(yakuza->mlx);
+		mlx_terminate(yakuza->mlx);
+		free_struct(yakuza);
 		exit(0);
 	}
 }
@@ -51,22 +57,39 @@ void	handle_keys(mlx_key_data_t keycode, t_tokugawa_sokoku *yakuza)
 }
 
 // func - 4
-// void	mouse_hook(t_mouse *xy, t_tokugawa_sokoku *yakuza, mlx_t *mlx)
-// {
-// 	int32_t x;
-// 	int32_t y;
-// 	double 	rot;
+void	rotate_right(t_tokugawa_sokoku *yakuza, double rotation_speed)
+{
+	double	old_dir_w;
+	double	old_plane_w;
 
-// 	mlx_get_mouse_pos(mlx, &x, &y);
-// 	rot = ROT_SPEED * (abs(xy->x - x));
-// 	// mlx_get_mouse_pos(mlx, &xy->x, &xy->y);
-// 	if (x > xy->x)
-// 		rotate_right(yakuza, rot);
-// 	else if (x < xy->x)
-// 		rotate_left(yakuza, rot);
-// 	mlx_cursor_hook(window, mouse_move_callback, &player);
-// mlx_set_cursor_mode(window, MLX_MOUSE_DISABLED);
-// Hide cursor and lock to window
+	old_dir_w = yakuza->kumicho->direction.w;
+	old_plane_w = yakuza->kumicho->plane.w;
+	yakuza->kumicho->direction.w = (yakuza->kumicho->direction.w
+			* cos(rotation_speed)) - (yakuza->kumicho->direction.h
+			* sin(rotation_speed));
+	yakuza->kumicho->direction.h = (old_dir_w * sin(rotation_speed))
+		+ (yakuza->kumicho->direction.h * cos(rotation_speed));
+	yakuza->kumicho->plane.w = (yakuza->kumicho->plane.w * cos(rotation_speed))
+		- (yakuza->kumicho->plane.h * sin(rotation_speed));
+	yakuza->kumicho->plane.h = (old_plane_w * sin(rotation_speed))
+		+ (yakuza->kumicho->plane.h * cos(rotation_speed));
+}
 
-// 	printf("Mouse position: %d, %d\n", x, y);
-// }
+// // func - 5
+void	rotate_left(t_tokugawa_sokoku *yakuza, double rotation_speed)
+{
+	double	old_dir_w;
+	double	old_plane_w;
+
+	old_dir_w = yakuza->kumicho->direction.w;
+	old_plane_w = yakuza->kumicho->plane.w;
+	yakuza->kumicho->direction.w = (yakuza->kumicho->direction.w
+			* cos(-rotation_speed)) - (yakuza->kumicho->direction.h
+			* sin(-rotation_speed));
+	yakuza->kumicho->direction.h = (old_dir_w * sin(-rotation_speed))
+		+ (yakuza->kumicho->direction.h * cos(-rotation_speed));
+	yakuza->kumicho->plane.w = (yakuza->kumicho->plane.w * cos(-rotation_speed))
+		- (yakuza->kumicho->plane.h * sin(-rotation_speed));
+	yakuza->kumicho->plane.h = (old_plane_w * sin(-rotation_speed))
+		+ (yakuza->kumicho->plane.h * cos(-rotation_speed));
+}

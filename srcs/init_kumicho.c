@@ -26,8 +26,8 @@ static int	is_direct(char news)
 	return (0);
 }
 
-// func - 2 
-static void 	set_dir(t_tokugawa_sokoku **yakuza, char news)
+// func - 2
+static void	set_dir(t_tokugawa_sokoku **yakuza, char news)
 {
 	if (news == 'N')
 	{
@@ -45,7 +45,7 @@ static void 	set_dir(t_tokugawa_sokoku **yakuza, char news)
 	{
 		(*yakuza)->kumicho->dir = 'W';
 		(*yakuza)->kumicho->direction.w = -1.0;
-		(*yakuza)->kumicho->direction.h = 0.0;	
+		(*yakuza)->kumicho->direction.h = 0.0;
 	}
 	else if (news == 'E')
 	{
@@ -81,10 +81,10 @@ static void	set_plane(t_tokugawa_sokoku **yakuza, char news)
 }
 
 // func - 4
-void 	init_kumicho_2(t_tokugawa_sokoku **yakuza)
+void	init_kumicho_2(t_tokugawa_sokoku **yakuza)
 {
-	int 	w;
-	int 	h;
+	int	w;
+	int	h;
 
 	h = 0;
 	while ((*yakuza)->map->map[h])

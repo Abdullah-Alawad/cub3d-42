@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 07:51:56 by modat             #+#    #+#             */
-/*   Updated: 2025/09/22 09:48:42 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/23 23:47:45 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,56 @@
 // func - 1
 void	malloc_err(void)
 {
-	perror("malloc");
+	perror("malloc falied\n");
 	exit(EXIT_FAILURE);
 }
 
 // func - 2
-void	free_arr(char **arr)
+void	free_double_array(char **doub)
 {
-	int	i;
+	int	k;
 
-	if (!arr) // always check NULL safety
+	if (!doub)
 		return ;
-	i = 0;
-	while (arr[i])
+	k = 0;
+	while (doub[k])
 	{
-		free(arr[i]);
-		i++;
+		free(doub[k]);
+		k++;
 	}
-	free(arr);
+	free(doub);
 }
 
 // func - 3
-
-void    exit_free(void)
+void	free_map(t_map *map)
 {
-    exit(1);
+	free_double_array(map->map);
+	free_double_array(map->cpy_map);
+	free(map->floor);
+	free(map->ceiling);
+	free(map->wall->north);
+	free(map->wall->south);
+	free(map->wall->east);
+	free(map->wall->west);
+	free(map->wall);
+	free(map);
 }
 
-
+// func - 4
+void	free_struct(t_tokugawa_sokoku *yakuza)
+{
+	mlx_delete_image(yakuza->mlx, yakuza->img);
+	mlx_delete_image(yakuza->mlx, yakuza->minimap->miniimg);
+	free(yakuza->minimap);
+	free_map(yakuza->map);
+	free(yakuza->camera);
+	free(yakuza->kumicho);
+	mlx_delete_texture(yakuza->texture->north);
+	mlx_delete_texture(yakuza->texture->south);
+	mlx_delete_texture(yakuza->texture->east);
+	mlx_delete_texture(yakuza->texture->west);
+	free(yakuza->texture);
+	mlx_delete_texture(yakuza->sky);
+	mlx_delete_texture(yakuza->grass);
+	free(yakuza);
+}

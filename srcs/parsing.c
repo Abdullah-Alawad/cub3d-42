@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:48:09 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/22 15:16:06 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/23 23:57:11 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ void	allocate_map(t_map **map)
 	if (!*map)
 		malloc_err();
 	(*map)->wall = malloc(sizeof(t_wall_path));
-	if (!(*map)->wall) // TODO: needs free
+	if (!(*map)->wall)
 		malloc_err();
 	(*map)->width = 0;
 	(*map)->height = 0;
-	(*map)->player_count = 0; 
+	(*map)->player_count = 0;
 }
 
 // func - 2
@@ -35,7 +35,7 @@ static void	init_map(t_map **map, char *map_buf)
 	}
 	(*map)->map = ft_split(map_buf, '\n');
 	if (!(*map)->map)
-		malloc_err(); // TODO: close fd in case of fail in map close map.cub
+		malloc_err();
 	copy_map(&(*map));
 }
 
@@ -48,23 +48,42 @@ static void	set_path(char *buf, t_map **map)
 	if (buf[i] == 'N')
 	{
 		(*map)->wall->north = ft_strtrim(&buf[i + 2], " /r/n/t");
-		is_path_valid((*map)->wall->north); // free north 
-		
+		if (!is_path_valid((*map)->wall->north))
+		{
+			free((*map)->wall->north);
+			(*map)->wall->north = NULL;
+			exit(1);
+		}
 	}
 	else if (buf[i] == 'S')
 	{
 		(*map)->wall->south = ft_strtrim(&buf[i + 2], " /r/n/t");
-		is_path_valid( (*map)->wall->south); // free north 
+		if (!is_path_valid((*map)->wall->south))
+		{
+			free((*map)->wall->south);
+			(*map)->wall->south = NULL;
+			exit(1);
+		}
 	}
 	else if (buf[i] == 'W')
 	{
 		(*map)->wall->west = ft_strtrim(&buf[i + 2], " /r/n/t");
-		is_path_valid((*map)->wall->west); // free north 
+		if (!is_path_valid((*map)->wall->west))
+		{
+			free((*map)->wall->west);
+			(*map)->wall->west = NULL;
+			exit(1);
+		}
 	}
 	else if (buf[i] == 'E')
 	{
 		(*map)->wall->east = ft_strtrim(&buf[i + 2], " /r/n/t");
-		is_path_valid((*map)->wall->east); // free north 
+		if (!is_path_valid((*map)->wall->east))
+		{
+			free((*map)->wall->east);
+			(*map)->wall->east = NULL;
+			exit(1);
+		}
 	}
 }
 
@@ -93,11 +112,13 @@ static void	parse_init(char *buf, t_map **map, char **map_buf)
 // func - 5
 int	parsing_reading(int ac, char **av, t_map **map)
 {
-	static char	*map_buf = NULL;
+	static char	*map_buf;
 	int			fd;
 	char		*buf;
+
+	map_buf = NULL;
 	if (ac != 2)
-		return (1); // TODO:free
+		return (1);
 	fd = open(av[1], O_RDONLY);
 	if (fd == -1)
 	{
@@ -107,7 +128,7 @@ int	parsing_reading(int ac, char **av, t_map **map)
 	buf = get_next_line(fd);
 	while (buf)
 	{
-		is_map_valid(buf); // free things
+		is_map_valid(buf);
 		parse_init(buf, map, &map_buf);
 		free(buf);
 		buf = get_next_line(fd);
@@ -119,7 +140,6 @@ int	parsing_reading(int ac, char **av, t_map **map)
 		printf("map not closed\n");
 		exit(1);
 	}
-	// map_check((*map)->map, (*map)->height);  NOTE: I think we don't need this function now
 	free(map_buf);
 	close(fd);
 	free(buf);

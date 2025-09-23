@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:02:08 by modat             #+#    #+#             */
-/*   Updated: 2025/09/22 15:16:32 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 00:02:58 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "yakuza.h"
 
 // func - 1
-void    init_map_buf(char **map_buf)
+void	init_map_buf(char **map_buf)
 {
-    if (!(*map_buf))
-    {
-        (*map_buf) = ft_strdup("");
-        if (!(*map_buf))
-            malloc_err();
-    }
+	if (!(*map_buf))
+	{
+		(*map_buf) = ft_strdup("");
+		if (!(*map_buf))
+			malloc_err();
+	}
 }
 
 // func - 2
@@ -61,9 +61,14 @@ static void	add_color(t_rgb *draw, char *buf)
 	comb = ft_split(b, ',');
 	if (!*comb || !comb)
 		malloc_err();
-	is_colors_checker(comb, &draw);
+	if (!is_colors_checker(comb, &draw))
+	{
+		free(b);
+		free_double_array(comb);
+		exit(1);
+	}
 	free(b);
-	free_arr(comb);
+	free_double_array(comb);
 }
 
 // func - 4
@@ -85,35 +90,19 @@ void	set_color(char *buf, t_map **map)
 	}
 }
 
-void	print_cpy(char **map, int height)
-{
-	int width;
-	
-	// printf("Map (%d):\n", height);
-    for (int y = 0; y < height; y++)
-    {
-		width = ft_strlen(map[y]);
-        for (int x = 0; x < width; x++)
-        {
-            printf("%c", map[y][x]);
-        }
-        printf("\n");
-    }
-}
-
 // func - 5
-void 	setting_map(t_map **map, char **av, int ac)
+void	setting_map(t_map **map, char **av, int ac)
 {
 	allocate_map(map);
 	if (parsing_reading(ac, av, map) == 1)
 	{
-		// error & free
-		exit_free();
+		free_map((*map));
+		exit(1);
 	}
 	if ((*map)->player_count != 1)
-    {
-        printf("players numbers is incorrect\n");
-        exit_free();
-    }
-
+	{
+		free_map((*map));
+		write(2, "players numbers is incorrect\n", 29);
+		exit(1);
+	}
 }

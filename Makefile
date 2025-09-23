@@ -6,9 +6,10 @@ NAME = cub3D
 SRC_DIR = srcs
 GNL_DIR = gnl
 GNL_SRCS = get_next_line 
-SRC_FILES = print_struct yakuza colors parsing parsing_utils error_handling init_map \
+SRC_FILES = yakuza colors parsing parsing_utils error_handling init_map \
 	map_validation_check map_validation_check_2 events  minimap tokugawa_sokoku init_tokugawa \
-	movements rotation init_kumicho flood_fill
+	movements init_kumicho flood_fill utils
+
 INC_DIR = includes
 
 SRCS =  $(addsuffix .c, $(addprefix $(SRC_DIR)/, $(SRC_FILES))) \
