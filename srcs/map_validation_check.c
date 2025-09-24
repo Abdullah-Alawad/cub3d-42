@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 12:59:57 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 12:00:38 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 14:57:02 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,16 +49,6 @@ int	is_colors_valid(int nbr)
 		return (0);
 	}
 }
-int 	color_split(char **comb, int k)
-{
-	int x;
-
-	if (comb[k] == NULL)
-		x = 0;
-	else 
-		x = ft_atoi(comb[k]);
-	return (x);
-}
 
 // func - 4
 int	is_colors_checker(char **comb, t_rgb **draw)
@@ -66,20 +56,12 @@ int	is_colors_checker(char **comb, t_rgb **draw)
 	int	k;
 
 	k = 0;
-	while (comb[k])
-		k++;
-	if (k != 3)
-	{
-		free_double_array(comb);
-		return (0);
-	}
-	k = 0;
 	(*draw)->r = color_split(comb, k);
 	if (!is_colors_valid((*draw)->r))
 		return (0);
 	k++;
 	(*draw)->g = color_split(comb, k);
-	if (!is_colors_valid((*draw)->g))
+	if (is_colors_valid((*draw)->g) == 0)
 		return (0);
 	k++;
 	(*draw)->b = color_split(comb, k);

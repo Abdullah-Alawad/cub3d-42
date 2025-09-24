@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:48:09 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/24 08:51:16 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 14:59:26 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,36 +62,40 @@ static void	set_path(char *buf, t_map **map)
 }
 
 // func - 4
-static void	parse_init(char *buf, t_map **map, char **map_buf)
+static int	parse_init(char *buf, t_map **map, char **map_buf)
 {
 	if (!buf)
-		return ;
+		return (0);
 	if (is_direction(buf) == 1)
 		set_path(buf, map);
 	else if (is_floor_cieling(buf) == 1)
-		set_color(buf, map);
+	{
+		if (set_color(buf, map) == 0)
+			return (0);
+	}
 	else if (is_map(buf) == 1)
 	{
 		(*map)->height++;
 		get_width_buf(buf, map, map_buf);
 	}
+	return (1);
 }
 
 // func - 5
 int	parsing_reading(int ac, char **av, t_map **map)
 {
-	static char	*map_buf;
+	static char	*map_buf = NULL;
 	int			fd;
 	char		*buf;
 
-	map_buf = NULL;
 	if (open_map(&fd, av, ac) == 1)
 		return (1);
 	buf = get_next_line(fd);
 	while (buf)
 	{
 		is_map_valid(buf);
-		parse_init(buf, map, &map_buf);
+		if (parse_init(buf, map, &map_buf) == 0)
+			return (close(fd), free(buf), free(map_buf), 0);
 		free(buf);
 		buf = get_next_line(fd);
 	}
@@ -100,9 +104,9 @@ int	parsing_reading(int ac, char **av, t_map **map)
 	if (flood_fill((*map), (*map)->py, (*map)->px) == 0)
 	{
 		write(2, "map not closed\n", 15);
-		return (1);
+		return (0);
 	}
 	close(fd);
 	frees(buf, map_buf);
-	return (0);
+	return (1);
 }

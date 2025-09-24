@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 07:51:56 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 11:10:37 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 14:29:22 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,16 +38,26 @@ void	free_double_array(char **doub)
 // func - 3
 void	free_map(t_map *map)
 {
-	free_double_array(map->map);
-	free_double_array(map->cpy_map);
-	free(map->floor);
-	free(map->ceiling);
-	free(map->wall->north);
-	free(map->wall->south);
-	free(map->wall->east);
-	free(map->wall->west);
-	free(map->wall);
-	free(map);
+	if (map->map)
+		free_double_array(map->map);
+	if (map->cpy_map)
+		free_double_array(map->cpy_map);
+	if (map->ceiling)
+		free(map->ceiling);
+	if (map->floor)
+		free(map->floor);
+	if (map->wall->north)
+		free(map->wall->north);
+	if (map->wall->south)
+		free(map->wall->south);
+	if (map->wall->east)
+		free(map->wall->east);
+	if (map->wall->west)
+		free(map->wall->west);
+	if (map->wall)
+		free(map->wall);
+	if (map)
+		free(map);
 }
 
 // func - 4

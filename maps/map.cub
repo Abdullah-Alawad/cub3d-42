@@ -3,7 +3,7 @@ SO  ./texture/wall_window.png
 WE  ./texture/wall.png
 EA  ./texture/wall_window.png
 
-F 255,255,0
+F 100,255,123
 C 137,207,240
 
       1111111111111111111111111

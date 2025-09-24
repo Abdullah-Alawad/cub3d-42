@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:02:08 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 12:13:06 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 14:57:40 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,48 +52,58 @@ void	get_width_buf(char *buf, t_map **map, char **map_buf)
 }
 
 // func - 3
-static void	add_color(t_rgb *draw, char *buf)
+static int	add_color(t_rgb *draw, char *buf)
 {
 	char	*b;
 	char	**comb;
+	int		k;
 
+	k = 0;
 	b = ft_strtrim(buf, " /r/t/nFC");
 	comb = ft_split(b, ',');
 	if (!*comb || !comb)
 		malloc_err();
-	if (!is_colors_checker(comb, &draw))
+	while (comb[k])
+		k++;
+	if (is_colors_checker(comb, &draw) == 0 || k != 3)
 	{
+		free_double_array(comb);
 		free(b);
-		exit(1);
+		write(2, "Error: invalid colors set\n", 26);
+		return (0);
 	}
 	free(b);
 	free_double_array(comb);
+	return (1);
 }
 
 // func - 4
-void	set_color(char *buf, t_map **map)
+int	set_color(char *buf, t_map **map)
 {
 	if (buf[0] == 'F')
 	{
 		(*map)->floor = malloc(sizeof(t_rgb));
 		if (!(*map)->floor)
-			return ;
-		add_color((*map)->floor, buf);
+			return (0);
+		if (add_color((*map)->floor, buf) == 0)
+			return (0);
 	}
 	else if (buf[0] == 'C')
 	{
 		(*map)->ceiling = malloc(sizeof(t_rgb));
 		if (!(*map)->ceiling)
-			return ;
-		add_color((*map)->ceiling, buf);
+			return (0);
+		if (add_color((*map)->ceiling, buf) == 0)
+			return (0);
 	}
+	return (1);
 }
 
 // func - 5
 int	setting_map(t_map **map, char **av, int ac)
 {
 	allocate_map(map);
-	if (parsing_reading(ac, av, map) == 1)
+	if (parsing_reading(ac, av, map) == 0)
 	{
 		free_map((*map));
 		return (1);
@@ -106,19 +116,3 @@ int	setting_map(t_map **map, char **av, int ac)
 	}
 	return (0);
 }
-
-// int	setting_map(t_map **map, char **av, int ac)
-// {
-// 	if (parsing_reading(ac, av, map) == 1)
-// 	{
-// 		free_map((*map));
-// 		return (1);
-// 	}
-// 	if ((*map)->player_count != 1)
-// 	{
-// 		free_map((*map));
-// 		write(2, "players numbers is incorrect\n", 29);
-// 		return (1);
-// 	}
-// 	return (0);
-// }

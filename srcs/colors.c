@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 10:05:54 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 09:32:00 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 14:57:11 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,16 @@ void	draw_wall_column_2(t_tokugawa_sokoku *yakuza, mlx_texture_t *tex, int x,
 			(rgba[0] << 24) | (rgba[1] << 16) | (rgba[2] << 8) | rgba[3]);
 		y++;
 	}
+}
+
+// func - 5
+int	color_split(char **comb, int k)
+{
+	int	x;
+
+	if (comb[k] == NULL)
+		x = 0;
+	else
+		x = ft_atoi(comb[k]);
+	return (x);
 }

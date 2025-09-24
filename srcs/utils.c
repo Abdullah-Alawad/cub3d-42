@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 23:25:39 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/24 12:12:57 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 14:52:08 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,17 +96,20 @@ void	init_texture(t_tokugawa_sokoku **yakuza)
 // func - 4
 void	setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
 {
-	int	param_len;
+	int		param_len;
+	t_map	*map;
 
+	map = NULL;
 	param_len = ft_strlen(av[1]);
 	if (!ft_strnstr(&av[1][param_len - 4], ".cub", 4))
 	{
 		write(2, "invalid file extention\n", 25);
 		exit(1);
 	}
+	if (setting_map(&map, av, ac) == 1)
+		exit(1);
 	init_tokugawa_sokoku(&(*yakuza));
-	if (setting_map(&(*yakuza)->map, av, ac) == 1)
-		free_struct(*yakuza);
+	(*yakuza)->map = map;
 	init_texture(&(*yakuza));
 	init_kumicho(&(*yakuza));
 	(*yakuza)->camera = malloc(sizeof(t_camera));
@@ -119,7 +122,7 @@ void	setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
 // {
 // 	int	param_len;
 // 	t_map	*map;
-	
+
 // 	param_len = ft_strlen(av[1]);
 // 	if (!ft_strnstr(&av[1][param_len - 4], ".cub", 4))
 // 	{
@@ -151,4 +154,8 @@ void	allocate_map(t_map **map)
 	(*map)->width = 0;
 	(*map)->height = 0;
 	(*map)->player_count = 0;
+	(*map)->map = NULL;
+	(*map)->cpy_map = NULL;
+	(*map)->floor = NULL;
+	(*map)->ceiling = NULL;
 }

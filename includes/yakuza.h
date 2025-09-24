@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 11:17:09 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 15:00:09 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ void				init_camera(t_tokugawa_sokoku **yakuza, int x);
 
 // init_map.c
 void				get_width_buf(char *buf, t_map **map, char **map_buf);
-void				set_color(char *buf, t_map **map);
+int					set_color(char *buf, t_map **map);
 int					setting_map(t_map **map, char **av, int ac);
 void				init_map_buf(char **map_buf);
 
@@ -219,4 +219,5 @@ void				color_it(mlx_image_t *img, t_rgb *draw, char fc);
 void				set_ceiling_floor(t_tokugawa_sokoku **yakuza);
 void				draw_wall_column_2(t_tokugawa_sokoku *yakuza,
 						mlx_texture_t *tex, int x, t_draw_ints draw_ints);
+int					color_split(char **comb, int k);
 #endif
