@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   yakuza.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/01 11:53:36 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 00:09:48 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 11:17:09 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@ typedef struct s_news_tex
 	mlx_texture_t	*east;
 	mlx_texture_t	*west;
 }					t_news_tex;
+
+typedef struct s_draw_ints
+{
+	int				tex_x;
+	int				tex_y;
+	int				d;
+	int				line_height;
+}					t_draw_ints;
 
 typedef struct s_wall_path
 {
@@ -125,8 +133,6 @@ typedef struct s_tokugawa_sokoku
 	t_camera		*camera;
 	t_kumicho		*kumicho;
 	t_news_tex		*texture;
-	mlx_texture_t	*sky;
-	mlx_texture_t	*grass;
 }					t_tokugawa_sokoku;
 
 // utils.c
@@ -134,13 +140,13 @@ void				side_dis(t_tokugawa_sokoku **yakuza);
 void				dis_to_wall(t_tokugawa_sokoku **yakuza);
 void				init_texture(t_tokugawa_sokoku **yakuza);
 void				setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac);
+void				allocate_map(t_map **map);
 
 // tokogawa_sokoku.c
 void				enter_tokugawa_sokoku(void *land);
 
 // parsing.c
 int					parsing_reading(int ac, char **av, t_map **map);
-void				allocate_map(t_map **map);
 
 // parsing_utils.c
 int					is_direction(char *buf);
@@ -157,6 +163,7 @@ void				right(t_tokugawa_sokoku *yakuza);
 // minimap.c
 void				minimap(t_minimap *minimap, t_map *map);
 void				draw_background(t_minimap *minimap);
+void				frees(char *s1, char *s2);
 
 // map_validation_check.c
 int					is_map_valid(char *buf);
@@ -176,16 +183,18 @@ void				init_camera(t_tokugawa_sokoku **yakuza, int x);
 // init_map.c
 void				get_width_buf(char *buf, t_map **map, char **map_buf);
 void				set_color(char *buf, t_map **map);
-void				setting_map(t_map **map, char **av, int ac);
+int					setting_map(t_map **map, char **av, int ac);
 void				init_map_buf(char **map_buf);
 
 // init_kumcho
 void				init_kumicho_2(t_tokugawa_sokoku **yakuza);
+void				minimap_color(t_map *map, int h, int w, uint32_t *color);
 
 // flood_fill.c
 void				copy_map(t_map **map);
 int					flood_fill(t_map *map, int py, int px);
 void				save_player_positions(t_map **map);
+int					open_map(int *fd, char **av, int ac);
 
 // events.c
 void				keypress_hook(mlx_key_data_t keycode, void *param);
@@ -202,12 +211,12 @@ void				malloc_err(void);
 void				free_double_array(char **doub);
 void				free_map(t_map *map);
 void				free_struct(t_tokugawa_sokoku *yakuza);
+void				invalid_path(char *str);
 
 // // colors.c
 uint32_t			rgb(int r, int g, int b);
-void				color_ceiling(mlx_image_t *img, mlx_texture_t *sky);
-void				color_floor(mlx_image_t *img, mlx_texture_t *floor);
 void				color_it(mlx_image_t *img, t_rgb *draw, char fc);
 void				set_ceiling_floor(t_tokugawa_sokoku **yakuza);
-
+void				draw_wall_column_2(t_tokugawa_sokoku *yakuza,
+						mlx_texture_t *tex, int x, t_draw_ints draw_ints);
 #endif

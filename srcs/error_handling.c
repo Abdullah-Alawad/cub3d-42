@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error_handling.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 07:51:56 by modat             #+#    #+#             */
-/*   Updated: 2025/09/23 23:47:45 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 11:10:37 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,18 +53,34 @@ void	free_map(t_map *map)
 // func - 4
 void	free_struct(t_tokugawa_sokoku *yakuza)
 {
-	mlx_delete_image(yakuza->mlx, yakuza->img);
-	mlx_delete_image(yakuza->mlx, yakuza->minimap->miniimg);
-	free(yakuza->minimap);
-	free_map(yakuza->map);
-	free(yakuza->camera);
-	free(yakuza->kumicho);
-	mlx_delete_texture(yakuza->texture->north);
-	mlx_delete_texture(yakuza->texture->south);
-	mlx_delete_texture(yakuza->texture->east);
-	mlx_delete_texture(yakuza->texture->west);
-	free(yakuza->texture);
-	mlx_delete_texture(yakuza->sky);
-	mlx_delete_texture(yakuza->grass);
-	free(yakuza);
+	if (yakuza->minimap->miniimg)
+		mlx_delete_image(yakuza->mlx, yakuza->minimap->miniimg);
+	if (yakuza->minimap)
+		free(yakuza->minimap);
+	if (yakuza->map)
+		free_map(yakuza->map);
+	if (yakuza->camera)
+		free(yakuza->camera);
+	if (yakuza->kumicho)
+		free(yakuza->kumicho);
+	if (yakuza->texture->north)
+		mlx_delete_texture(yakuza->texture->north);
+	if (yakuza->texture->south)
+		mlx_delete_texture(yakuza->texture->south);
+	if (yakuza->texture->east)
+		mlx_delete_texture(yakuza->texture->east);
+	if (yakuza->texture->west)
+		mlx_delete_texture(yakuza->texture->west);
+	if (yakuza->texture)
+		free(yakuza->texture);
+	if (yakuza->mlx)
+		mlx_delete_image(yakuza->mlx, yakuza->img);
+}
+
+// func - 5
+void	invalid_path(char *str)
+{
+	free(str);
+	write(2, "Error: invalid path\n", 20);
+	exit(1);
 }

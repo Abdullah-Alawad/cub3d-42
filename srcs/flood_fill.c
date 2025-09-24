@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   flood_fill.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 14:16:01 by modat             #+#    #+#             */
-/*   Updated: 2025/09/23 23:24:55 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 10:02:23 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,15 @@ void	save_player_positions(t_map **map)
 {
 	int		y;
 	int		x;
+	int		width;
 	char	c;
 
 	y = 0;
 	while (y < (*map)->height)
 	{
 		x = 0;
-		while (x < (*map)->width)
+		width = ft_strlen((*map)->cpy_map[y]);
+		while (x < width)
 		{
 			c = (*map)->cpy_map[y][x];
 			if (c == 'N' || c == 'S' || c == 'E' || c == 'W')
@@ -105,4 +107,18 @@ void	save_player_positions(t_map **map)
 		}
 		y++;
 	}
+}
+
+// func - 4
+int	open_map(int *fd, char **av, int ac)
+{
+	if (ac != 2)
+		return (1);
+	(*fd) = open(av[1], O_RDONLY);
+	if ((*fd) == -1)
+	{
+		perror("open");
+		return (1);
+	}
+	return (0);
 }

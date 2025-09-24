@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:05:51 by modat             #+#    #+#             */
-/*   Updated: 2025/09/23 22:14:27 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 08:32:50 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@ int	is_direction(char *buf)
 	int	i;
 
 	i = 0;
+	while (buf[i] == ' ' || buf[i] == '\t')
+		i++;
 	if (buf[i] == 'N' && buf[i + 1] == 'O')
 		return (1);
 	else if (buf[i] == 'S' && buf[i + 1] == 'O')

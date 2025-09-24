@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 10:53:20 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 00:00:12 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 10:46:50 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,30 +38,22 @@ static void	draw(t_minimap *minimap, uint32_t color, t_ints start, t_ints p)
 	}
 }
 
-// func - 2
-void	minimap(t_minimap *minimap, t_map *map)
+static void	minimap_2(t_minimap *minimap, t_map *map, t_ints cell, t_ints start)
 {
-	t_ints		cell;
-	t_ints		start;
 	int			h;
 	int			w;
+	int			width;
 	uint32_t	color;
 
-	cell.w = MINI_WIDTH / map->width;
-	cell.h = MINI_HEIGHT / map->height;
 	h = 0;
 	while (h < map->height)
 	{
 		w = 0;
-		while (w < map->width)
+		width = ft_strlen(map->map[h]);
+		while (w < width)
 		{
 			color = 0x00000033;
-			if (map->map[h][w] == '1')
-				color = 0xBBDDFBBB;
-			else if (map->map[h][w] == '0')
-				color = 0xFFFFFFFF;
-			else if (map->map[h][w] == 'N')
-				color = 0xFF0000FF;
+			minimap_color(map, h, w, &color);
 			start.w = w * cell.w;
 			start.h = h * cell.h;
 			draw(minimap, color, start, cell);
@@ -69,6 +61,18 @@ void	minimap(t_minimap *minimap, t_map *map)
 		}
 		h++;
 	}
+}
+
+// func - 2
+void	minimap(t_minimap *minimap, t_map *map)
+{
+	t_ints	cell;
+	t_ints	start;
+
+	start.w = 0.0;
+	cell.w = MINI_WIDTH / map->width;
+	cell.h = MINI_HEIGHT / map->height;
+	minimap_2(minimap, map, cell, start);
 }
 
 // func - 3
@@ -88,4 +92,11 @@ void	draw_background(t_minimap *minimap)
 		}
 		x++;
 	}
+}
+
+// func - 5
+void	frees(char *s1, char *s2)
+{
+	free(s1);
+	free(s2);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_check.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 12:59:57 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 00:01:31 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 12:00:38 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,16 @@ int	is_colors_valid(int nbr)
 		return (0);
 	}
 }
+int 	color_split(char **comb, int k)
+{
+	int x;
+
+	if (comb[k] == NULL)
+		x = 0;
+	else 
+		x = ft_atoi(comb[k]);
+	return (x);
+}
 
 // func - 4
 int	is_colors_checker(char **comb, t_rgb **draw)
@@ -56,27 +66,25 @@ int	is_colors_checker(char **comb, t_rgb **draw)
 	int	k;
 
 	k = 0;
-	if (comb[k])
-	{
-		(*draw)->r = ft_atoi(comb[k]);
-		if (!is_colors_valid((*draw)->r))
-			return (0);
+	while (comb[k])
 		k++;
-	}
-	if (comb[k])
+	if (k != 3)
 	{
-		(*draw)->g = ft_atoi(comb[k]);
-		if (!is_colors_valid((*draw)->g))
-			return (0);
-		k++;
+		free_double_array(comb);
+		return (0);
 	}
-	if (comb[k])
-	{
-		(*draw)->b = ft_atoi(comb[k]);
-		if (!is_colors_valid((*draw)->b))
-			return (0);
-		k++;
-	}
+	k = 0;
+	(*draw)->r = color_split(comb, k);
+	if (!is_colors_valid((*draw)->r))
+		return (0);
+	k++;
+	(*draw)->g = color_split(comb, k);
+	if (!is_colors_valid((*draw)->g))
+		return (0);
+	k++;
+	(*draw)->b = color_split(comb, k);
+	if (!is_colors_valid((*draw)->b))
+		return (0);
 	return (1);
 }
 
@@ -92,10 +100,6 @@ int	is_map_valid(char *buf)
 	else if (is_newline(buf) == 1)
 		return (1);
 	else
-	{
 		perror("unreognized input");
-		// IMPORTANT
-		// exit_free();
-	}
 	return (0);
 }

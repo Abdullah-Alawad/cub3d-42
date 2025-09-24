@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   colors.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/04 10:05:54 by modat             #+#    #+#             */
-/*   Updated: 2025/09/23 23:48:32 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 09:32:00 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,66 +15,18 @@
 // func - 1
 uint32_t	rgb(int r, int g, int b)
 {
-	return (((uint32_t)r << 24) | ((uint32_t)g << 16) | ((uint32_t)b << 8) | ((uint32_t)255));
+	return (((uint32_t)r << 24) | ((uint32_t)g << 16)
+		| ((uint32_t)b << 8) | ((uint32_t)255));
 }
 
 // func - 2
-void	color_ceiling(mlx_image_t *img, mlx_texture_t *sky)
+void	set_ceiling_floor(t_tokugawa_sokoku **yakuza)
 {
-	uint32_t	idx;
-	uint8_t		r;
-	uint8_t		g;
-	uint8_t		b;
-	uint8_t		a;
-
-	for (uint32_t y = 0; y < sky->height && y < HEIGHT; y++)
-	{
-		for (uint32_t x = 0; x < sky->width && x < WIDTH; x++)
-		{
-			idx = (y * sky->width + x) * 4;
-			r = sky->pixels[idx + 0];
-			g = sky->pixels[idx + 1];
-			b = sky->pixels[idx + 2];
-			a = sky->pixels[idx + 3];
-			mlx_put_pixel(img, x, y, (r << 24) | (g << 16) | (b << 8) | a);
-		}
-	}
+	color_it((*yakuza)->img, (*yakuza)->map->ceiling, 'C');
+	color_it((*yakuza)->img, (*yakuza)->map->floor, 'F');
 }
 
 // func - 3
-void	color_floor(mlx_image_t *img, mlx_texture_t *floor)
-{
-	int			h;
-	uint32_t	idx;
-	uint8_t		r;
-	uint8_t		g;
-	uint8_t		b;
-	uint8_t		a;
-
-	h = HEIGHT / 2;
-	for (uint32_t y = 0; y < floor->height && h < HEIGHT; y++)
-	{
-		for (uint32_t x = 0; x < floor->width && x < WIDTH; x++)
-		{
-			idx = (y * floor->width + x) * 4;
-			r = floor->pixels[idx + 0];
-			g = floor->pixels[idx + 1];
-			b = floor->pixels[idx + 2];
-			a = floor->pixels[idx + 3];
-			mlx_put_pixel(img, x, h, (r << 24) | (g << 16) | (b << 8) | a);
-		}
-		h++;
-	}
-}
-
-// func - 4
-void	set_ceiling_floor(t_tokugawa_sokoku **yakuza)
-{
-	color_ceiling((*yakuza)->img, (*yakuza)->sky);
-	color_floor((*yakuza)->img, (*yakuza)->grass);
-}
-
-// func - 5
 void	color_it(mlx_image_t *img, t_rgb *draw, char fc)
 {
 	int			h;
@@ -98,5 +50,34 @@ void	color_it(mlx_image_t *img, t_rgb *draw, char fc)
 			w++;
 		}
 		h++;
+	}
+}
+
+// func - 4
+void	draw_wall_column_2(t_tokugawa_sokoku *yakuza, mlx_texture_t *tex, int x,
+		t_draw_ints draw_ints)
+{
+	int			y;
+	uint32_t	idx;
+	uint8_t		rgba[4];
+
+	y = yakuza->camera->wall_starts;
+	while (y < yakuza->camera->wall_ends)
+	{
+		draw_ints.d = y * 256 - HEIGHT * 128 + draw_ints.line_height * 128;
+		draw_ints.tex_y = ((draw_ints.d * tex->height) / draw_ints.line_height)
+			/ 256;
+		if (draw_ints.tex_y < 0)
+			draw_ints.tex_y = 0;
+		if (draw_ints.tex_y >= (int)tex->height)
+			draw_ints.tex_y = tex->height - 1;
+		idx = (draw_ints.tex_y * tex->width + draw_ints.tex_x) * 4;
+		rgba[0] = tex->pixels[idx + 0];
+		rgba[1] = tex->pixels[idx + 1];
+		rgba[2] = tex->pixels[idx + 2];
+		rgba[3] = tex->pixels[idx + 3];
+		mlx_put_pixel(yakuza->img, x, y,
+			(rgba[0] << 24) | (rgba[1] << 16) | (rgba[2] << 8) | rgba[3]);
+		y++;
 	}
 }

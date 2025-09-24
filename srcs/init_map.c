@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/09 16:02:08 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 00:02:58 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 12:13:06 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ static void	add_color(t_rgb *draw, char *buf)
 	if (!is_colors_checker(comb, &draw))
 	{
 		free(b);
-		free_double_array(comb);
 		exit(1);
 	}
 	free(b);
@@ -91,18 +90,35 @@ void	set_color(char *buf, t_map **map)
 }
 
 // func - 5
-void	setting_map(t_map **map, char **av, int ac)
+int	setting_map(t_map **map, char **av, int ac)
 {
 	allocate_map(map);
 	if (parsing_reading(ac, av, map) == 1)
 	{
 		free_map((*map));
-		exit(1);
+		return (1);
 	}
 	if ((*map)->player_count != 1)
 	{
 		free_map((*map));
 		write(2, "players numbers is incorrect\n", 29);
-		exit(1);
+		return (1);
 	}
+	return (0);
 }
+
+// int	setting_map(t_map **map, char **av, int ac)
+// {
+// 	if (parsing_reading(ac, av, map) == 1)
+// 	{
+// 		free_map((*map));
+// 		return (1);
+// 	}
+// 	if ((*map)->player_count != 1)
+// 	{
+// 		free_map((*map));
+// 		write(2, "players numbers is incorrect\n", 29);
+// 		return (1);
+// 	}
+// 	return (0);
+// }

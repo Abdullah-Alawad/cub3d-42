@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   events.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/02 11:57:03 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 00:04:51 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 10:06:01 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ void	close_win(void *param)
 
 	yakuza = (t_tokugawa_sokoku *)param;
 	mlx_close_window(yakuza->mlx);
-	mlx_terminate(yakuza->mlx);
 	free_struct(yakuza);
+	mlx_terminate(yakuza->mlx);
 	exit(0);
 }
 
@@ -31,12 +31,7 @@ void	keypress_hook(mlx_key_data_t keycode, void *param)
 
 	yakuza = (t_tokugawa_sokoku *)param;
 	if (keycode.key == MLX_KEY_ESCAPE)
-	{
 		mlx_close_window(yakuza->mlx);
-		mlx_terminate(yakuza->mlx);
-		free_struct(yakuza);
-		exit(0);
-	}
 }
 
 // func - 3

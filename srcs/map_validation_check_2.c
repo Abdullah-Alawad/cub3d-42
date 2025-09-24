@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_validation_check_2.c                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 18:37:28 by modat             #+#    #+#             */
-/*   Updated: 2025/09/23 23:20:50 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 07:38:42 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,13 @@ static void	is_top_bottom_one(char *map)
 }
 
 // func - 3
+static void	perror_exit(void)
+{
+	perror("unclosed map up_daown");
+	exit(1);
+}
+
+// func - 4
 static void	up_down(char **map, int height)
 {
 	int	h;
@@ -69,15 +76,9 @@ static void	up_down(char **map, int height)
 				|| map[h][w] == 'E' || map[h][w] == 'W')
 			{
 				if ((map[h - 1][w] == ' ') || (map[h + 1][w] == ' '))
-				{
-					perror("unclosed map up_daown");
-					exit(1);
-				}
+					perror_exit();
 				if ((map[h - 1][w] == '\0') || (map[h + 1][w] == '\0'))
-				{
-					perror("unclosed map up_daown");
-					exit(1);
-				}
+					perror_exit();
 			}
 			w++;
 		}
@@ -85,7 +86,7 @@ static void	up_down(char **map, int height)
 	}
 }
 
-// func - 4
+// func - 5
 void	map_check(char **map, int height)
 {
 	int	h;

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_kumicho.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/20 18:29:35 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/20 18:29:35 by marvin           ###   ########.fr       */
+/*   Updated: 2025/09/24 10:47:07 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,16 @@ void	init_kumicho_2(t_tokugawa_sokoku **yakuza)
 		}
 		h++;
 	}
+}
+
+// func - 5
+void	minimap_color(t_map *map, int h, int w, uint32_t *color)
+{
+	if (map->map[h][w] == '1')
+		*color = 0xBBDDFBBB;
+	else if (map->map[h][w] == '0')
+		*color = 0xFFFFFFFF;
+	else if (map->map[h][w] == 'N' || map->map[h][w] == 'S'
+		|| map->map[h][w] == 'W' || map->map[h][w] == 'E')
+		*color = 0xFF0000FF;
 }

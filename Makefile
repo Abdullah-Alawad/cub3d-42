@@ -25,20 +25,16 @@ DIR_MLX = ./MLX42
 MLX_LIB = $(DIR_MLX)/build/libmlx42.a
 MLX_INC = -I$(DIR_MLX)/include
 MLX_FLAGS = -L/usr/local/lib -ldl -lglfw -pthread -lm
-# MLX_FLAGS = -ldl -lglfw -pthread -lm
 
 
 all: $(LIBFT) $(MLX_LIB) $(NAME)
 
 $(NAME): $(OBJCS) $(LIBFT) $(MLX_LIB) includes/yakuza.h
 	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS)
-# 	$(CC) $(CFLAGS) $(OBJCS) $(LIBFT) $(MLX_LIB) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(MLX_FLAGS)
-# 	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB)  $(LIBFT) 
 
 $(LIBFT):
 	make -C $(DIR_LIB)
 
-# Build MLX42 once with CMake
 $(MLX_LIB):
 	cd $(DIR_MLX) && cmake -B build && cmake --build build -j4
 
