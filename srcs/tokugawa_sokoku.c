@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/12 14:15:24 by modat             #+#    #+#             */
-/*   Updated: 2025/09/24 10:45:29 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 15:57:50 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	draw_wall_column(t_tokugawa_sokoku *yakuza, int x,
 }
 
 // func - 3
+// study if you want to flip
 static mlx_texture_t	*choose_texture(t_tokugawa_sokoku *yakuza)
 {
 	if (yakuza->camera->side == 0)

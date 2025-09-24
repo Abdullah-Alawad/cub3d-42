@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/23 23:25:39 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/24 14:52:08 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 15:16:54 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ void	setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
 	param_len = ft_strlen(av[1]);
 	if (!ft_strnstr(&av[1][param_len - 4], ".cub", 4))
 	{
-		write(2, "invalid file extention\n", 25);
+		write(2, "invalid file extention\n", 24);
 		exit(1);
 	}
 	if (setting_map(&map, av, ac) == 1)

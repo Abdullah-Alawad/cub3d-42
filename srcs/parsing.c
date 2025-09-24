@@ -6,7 +6,7 @@
 /*   By: modat <modat@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/08 15:48:09 by marvin            #+#    #+#             */
-/*   Updated: 2025/09/24 14:59:26 by modat            ###   ########.fr       */
+/*   Updated: 2025/09/24 15:30:41 by modat            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ int	parsing_reading(int ac, char **av, t_map **map)
 	{
 		is_map_valid(buf);
 		if (parse_init(buf, map, &map_buf) == 0)
-			return (close(fd), free(buf), free(map_buf), 0);
+			return (close(fd), free(buf), free(map_buf), get_next_line(-1), 0);
 		free(buf);
 		buf = get_next_line(fd);
 	}

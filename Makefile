@@ -46,6 +46,7 @@ clean:
 
 fclean: clean
 	make fclean -C $(DIR_LIB)
+	rm -rf $(DIR_MLX)/build
 	rm -f $(NAME)
 
 .PHONY: all re clean fclean
