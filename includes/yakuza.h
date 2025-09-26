@@ -151,9 +151,9 @@ typedef struct s_tokugawa_sokoku
 // utils.c
 void				side_dis(t_tokugawa_sokoku **yakuza);
 void				dis_to_wall(t_tokugawa_sokoku **yakuza);
-void				init_texture(t_tokugawa_sokoku **yakuza);
+int					init_texture(t_tokugawa_sokoku **yakuza);
 void				setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac);
-void				allocate_map(t_map **map);
+int					allocate_map(t_map **map);
 
 // tokogawa_sokoku.c
 void				enter_tokugawa_sokoku(void *land);
@@ -187,12 +187,12 @@ int					is_colors_checker(char **comb, t_rgb **draw);
 int					is_path_valid(char *buf);
 
 // map_validation_check_2.c
-void				map_check(char **map, int height);
+void				set_default_values(t_tokugawa_sokoku **yakuza);
 
 // init_tokugawa.c
-void				init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza);
-void				init_minimap(t_tokugawa_sokoku **yakuza);
-void				init_kumicho(t_tokugawa_sokoku **yakuza);
+int					init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza);
+int					init_minimap(t_tokugawa_sokoku **yakuza);
+int					init_kumicho(t_tokugawa_sokoku **yakuza);
 void				init_camera(t_tokugawa_sokoku **yakuza, int x);
 
 // init_map.c
@@ -245,5 +245,6 @@ int					check_error(t_parsing_flags *flags, t_map **map, char *map_buf, int fd);
 int					special_err1(t_parsing_flags *flags, char *buf);
 int					special_err2(char *str);
 int					check_color_line(char *buf, int i);
+void				free_map_exit(t_map *map);
 
 #endif

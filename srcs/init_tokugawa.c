@@ -13,30 +13,40 @@
 #include "yakuza.h"
 
 // func -1
-static void	init_mlx(mlx_t **mlx)
+static int	init_mlx(mlx_t **mlx)
 {
 	mlx_set_setting(MLX_MAXIMIZED, true);
 	(*mlx) = mlx_init(WIDTH, HEIGHT, "YAKUZA", true);
 	if (!(*mlx))
 	{
 		strerror(mlx_errno);
-		return ;
+		return (0);
 	}
+	return (1);
 }
 
 // func - 2
-void	init_minimap(t_tokugawa_sokoku **yakuza)
+int	init_minimap(t_tokugawa_sokoku **yakuza)
 {
 	(*yakuza)->minimap = malloc(sizeof(t_minimap));
 	if (!(*yakuza)->minimap)
-		malloc_err();
+	{
+		ft_putstr_fd("Error:\nminimap malloc failed\n", 2);
+		free_struct(*yakuza);
+		exit(1);
+	}
 	(*yakuza)->minimap->h = 0;
 	(*yakuza)->minimap->w = 0;
 	(*yakuza)->minimap->miniimg = mlx_new_image((*yakuza)->mlx, MINI_WIDTH,
 			MINI_HEIGHT);
 	if (!(*yakuza)->minimap->miniimg || (mlx_image_to_window((*yakuza)->mlx,
 				(*yakuza)->minimap->miniimg, 20, 20) < 0))
-		return ;
+	{
+		ft_putstr_fd("Error:\nminimap img malloc failed\n", 2);
+		free_struct(*yakuza);
+		exit(1);
+	}
+	return (1);
 }
 
 // func - 3
@@ -56,30 +66,43 @@ void	init_camera(t_tokugawa_sokoku **yakuza, int x)
 }
 
 // func - 4
-void	init_kumicho(t_tokugawa_sokoku **yakuza)
+int	init_kumicho(t_tokugawa_sokoku **yakuza)
 {
 	(*yakuza)->kumicho = malloc(sizeof(t_kumicho));
 	if (!(*yakuza)->kumicho)
 	{
-		free_map((*yakuza)->map);
-		malloc_err();
+		ft_putstr_fd("Error:\nkumicho init failed\n", 2);
+		free_struct((*yakuza));
+		exit(1);
 	}
 	init_kumicho_2(&(*yakuza));
+	return (1);
 }
 
 // func - 5
-void	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza)
+int	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza)
 {
 	(*yakuza) = malloc(sizeof(t_tokugawa_sokoku));
 	if (!(*yakuza))
-		malloc_err();
-	init_mlx(&(*yakuza)->mlx);
+	{
+		ft_putstr_fd("Error:\nyakuza malloc: failed\n", 2);
+		return (0);
+	}
+	if (init_mlx(&(*yakuza)->mlx) == 0)
+	{
+		ft_putstr_fd("Error:\nmlx_init(): failed\n", 2);
+		free (*yakuza);
+		return (0);
+	}
 	(*yakuza)->img = mlx_new_image((*yakuza)->mlx, WIDTH, HEIGHT);
 	if (!(*yakuza)->img || (mlx_image_to_window((*yakuza)->mlx, (*yakuza)->img,
 				0, 0) < 0))
 	{
+		mlx_terminate((*yakuza)->mlx);
 		free(*yakuza);
-		write(2, "mlx_new_img(): failed\n", 14);
-		return ;
+		ft_putstr_fd("Error:\nmlx_new_img(): failed\n", 2);
+		return (0);
 	}
+	set_default_values(&(*yakuza));
+	return (1);
 }

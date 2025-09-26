@@ -76,3 +76,8 @@ int	check_color_line(char *buf, int i)
 	else
 		return (0);
 }
+void	free_map_exit(t_map *map)
+{
+	free_map(map);
+	exit (1);
+}

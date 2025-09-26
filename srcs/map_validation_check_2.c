@@ -13,91 +13,11 @@
 #include "yakuza.h"
 
 // func - 1
-static void	is_beg_end_one(char *map)
+void	set_default_values(t_tokugawa_sokoku **yakuza)
 {
-	char	*tmp;
-	int		len;
-
-	tmp = ft_strtrim(map, " \n\t");
-	len = ft_strlen(tmp);
-	if (tmp[0] != '1' || tmp[len - 1] != '1')
-	{
-		perror("unclosd map: beg_end");
-		exit(1);
-	}
-	free(tmp);
-}
-
-// func - 2
-static void	is_top_bottom_one(char *map)
-{
-	int	w;
-
-	w = 0;
-	while (map[w] == ' ' || map[w] == '\t')
-		w++;
-	while (map[w])
-	{
-		if (map[w] == ' ')
-			w++;
-		else if (map[w] == '1')
-			w++;
-		else
-		{
-			perror("unclosed map top_bo");
-			exit(1);
-		}
-	}
-}
-
-// func - 3
-static void	perror_exit(void)
-{
-	perror("unclosed map up_daown");
-	exit(1);
-}
-
-// func - 4
-static void	up_down(char **map, int height)
-{
-	int	h;
-	int	w;
-	int	len;
-
-	h = 1;
-	len = 0;
-	while (h < (height - 1))
-	{
-		w = 0;
-		len = ft_strlen(map[h]);
-		while (w < len)
-		{
-			if (map[h][w] == '0' || map[h][w] == 'N' || map[h][w] == 'S'
-				|| map[h][w] == 'E' || map[h][w] == 'W')
-			{
-				if ((map[h - 1][w] == ' ') || (map[h + 1][w] == ' '))
-					perror_exit();
-				if ((map[h - 1][w] == '\0') || (map[h + 1][w] == '\0'))
-					perror_exit();
-			}
-			w++;
-		}
-		h++;
-	}
-}
-
-// func - 5
-void	map_check(char **map, int height)
-{
-	int	h;
-
-	h = 1;
-	is_top_bottom_one(map[0]);
-	is_top_bottom_one(map[height - 1]);
-	while (h < (height - 1))
-	{
-		is_beg_end_one(map[h]);
-		h++;
-	}
-	up_down(map, height);
+	(*yakuza)->minimap = NULL;
+	(*yakuza)->map = NULL;
+	(*yakuza)->camera = NULL;
+	(*yakuza)->kumicho = NULL;
+	(*yakuza)->texture = NULL;
 }

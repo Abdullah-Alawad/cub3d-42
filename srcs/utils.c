@@ -72,14 +72,14 @@ void	dis_to_wall(t_tokugawa_sokoku **yakuza)
 }
 
 // func - 3
-void	init_texture(t_tokugawa_sokoku **yakuza)
+int	init_texture(t_tokugawa_sokoku **yakuza)
 {
 	(*yakuza)->texture = malloc(sizeof(t_news_tex));
 	if (!(*yakuza)->texture)
 	{
-		free_map((*yakuza)->map);
-		free(yakuza);
-		malloc_err();
+		ft_putstr_fd("Error:\ntexture malloc failed\n", 2);
+		free_struct(*yakuza);
+		exit(1);
 	}
 	(*yakuza)->texture->north = mlx_load_png((*yakuza)->map->wall->north);
 	(*yakuza)->texture->south = mlx_load_png((*yakuza)->map->wall->south);
@@ -88,9 +88,11 @@ void	init_texture(t_tokugawa_sokoku **yakuza)
 	if (!(*yakuza)->texture->north || !(*yakuza)->texture->east
 		|| !(*yakuza)->texture->south || !(*yakuza)->texture->west)
 	{
-		write(2, "Texture not loaded!\n", 21);
-		return ;
+		free_struct(*yakuza);
+		ft_putstr_fd("Error:\nTexture not loaded!\n", 2);
+		exit(1);
 	}
+	return (1);
 }
 
 // func - 4
@@ -103,54 +105,37 @@ void	setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
 	param_len = ft_strlen(av[1]);
 	if (!ft_strnstr(&av[1][param_len - 4], ".cub", 4))
 	{
-		write(2, "invalid file extention\n", 24);
+		ft_putstr_fd("Error:\ninvalid file extention\n", 2);
 		exit(1);
 	}
-	if (setting_map(&map, av, ac) == 1)
-		exit(1);
-	init_tokugawa_sokoku(&(*yakuza));
+	setting_map(&map, av, ac);
+	if (init_tokugawa_sokoku(&(*yakuza)) == 0)
+		free_map_exit(map);
 	(*yakuza)->map = map;
 	init_texture(&(*yakuza));
 	init_kumicho(&(*yakuza));
 	(*yakuza)->camera = malloc(sizeof(t_camera));
 	if (!(*yakuza)->camera)
-		malloc_err();
+	{
+		ft_putstr_fd("Error:\ncamera malloc failed\n", 2);
+		free_struct(*yakuza);
+		exit (1);
+	}
 	init_minimap(&(*yakuza));
 }
 
-// void	setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
-// {
-// 	int	param_len;
-// 	t_map	*map;
-
-// 	param_len = ft_strlen(av[1]);
-// 	if (!ft_strnstr(&av[1][param_len - 4], ".cub", 4))
-// 	{
-// 		write(2, "invalid file extention\n", 25);
-// 		exit(1);
-// 	}
-// 	allocate_map(&map);
-// 	if (setting_map(&(*yakuza)->map, av, ac) == 1)
-// 		malloc_err();
-// 	init_tokugawa_sokoku(&(*yakuza));
-// 	(*yakuza)->map = map;
-// 	init_texture(&(*yakuza));
-// 	init_kumicho(&(*yakuza));
-// 	(*yakuza)->camera = malloc(sizeof(t_camera));
-// 	if (!(*yakuza)->camera)
-// 		malloc_err();
-// 	init_minimap(&(*yakuza));
-// }
-
 // func - 5
-void	allocate_map(t_map **map)
+int	allocate_map(t_map **map)
 {
 	(*map) = malloc(sizeof(t_map));
 	if (!*map)
-		malloc_err();
+		return (0);
 	(*map)->wall = malloc(sizeof(t_wall_path));
 	if (!(*map)->wall)
-		malloc_err();
+	{
+		free (*map);
+		return (0);
+	}
 	(*map)->wall->north = NULL;
 	(*map)->wall->south = NULL;
 	(*map)->wall->west = NULL;
@@ -162,4 +147,5 @@ void	allocate_map(t_map **map)
 	(*map)->cpy_map = NULL;
 	(*map)->floor = NULL;
 	(*map)->ceiling = NULL;
+	return (1);
 }

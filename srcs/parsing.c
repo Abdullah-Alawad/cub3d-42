@@ -96,7 +96,7 @@ int	parsing_reading(int ac, char **av, t_map **map)
 		close(fd);
 		if (map_buf)
 			free(map_buf);
-		write(2, "map not closed\n", 15);
+		ft_putstr_fd("Error:\nmap not closed\n", 2);
 		return (0);
 	}
 	close(fd);

@@ -110,17 +110,18 @@ int	set_color(char *buf, t_map **map, int i)
 // func - 5
 int	setting_map(t_map **map, char **av, int ac)
 {
-	allocate_map(map);
+	if (allocate_map(map) == 0)
+		exit(1);
 	if (parsing_reading(ac, av, map) == 0)
 	{
 		free_map((*map));
-		return (1);
+		exit(1);
 	}
 	if ((*map)->player_count != 1)
 	{
 		free_map((*map));
-		write(2, "players numbers is incorrect\n", 29);
-		return (1);
+		ft_putstr_fd("Error:\nplayers numbers is incorrect\n", 2);
+		exit(1);
 	}
 	return (0);
 }

@@ -73,13 +73,13 @@ void	free_struct(t_tokugawa_sokoku *yakuza)
 		free(yakuza->camera);
 	if (yakuza->kumicho)
 		free(yakuza->kumicho);
-	if (yakuza->texture->north)
+	if (yakuza->texture && yakuza->texture->north)
 		mlx_delete_texture(yakuza->texture->north);
-	if (yakuza->texture->south)
+	if (yakuza->texture && yakuza->texture->south)
 		mlx_delete_texture(yakuza->texture->south);
-	if (yakuza->texture->east)
+	if (yakuza->texture && yakuza->texture->east)
 		mlx_delete_texture(yakuza->texture->east);
-	if (yakuza->texture->west)
+	if (yakuza->texture && yakuza->texture->west)
 		mlx_delete_texture(yakuza->texture->west);
 	if (yakuza->texture)
 		free(yakuza->texture);
