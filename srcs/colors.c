@@ -88,7 +88,7 @@ int	color_split(char **comb, int k)
 	int	x;
 
 	if (comb[k] == NULL)
-		x = 0;
+		x = -1;
 	else
 		x = ft_atoi(comb[k]);
 	return (x);

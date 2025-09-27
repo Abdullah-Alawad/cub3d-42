@@ -19,7 +19,7 @@ int	ft_isdigit(int digit)
 		return (1);
 	}
 	else
-	{	
+	{
 		return (0);
 	}
 }

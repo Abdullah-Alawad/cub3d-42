@@ -16,6 +16,11 @@ int	main(int ac, char **av)
 {
 	t_tokugawa_sokoku	*yakuza;
 
+	if (ac != 2)
+	{
+		ft_putstr_fd("Error:\nAdd a map file or aguments too many\n", 2);
+		exit (1);
+	}
 	setup_config(&yakuza, av, ac);
 	mlx_close_hook(yakuza->mlx, close_win, yakuza);
 	mlx_key_hook(yakuza->mlx, keypress_hook, yakuza);

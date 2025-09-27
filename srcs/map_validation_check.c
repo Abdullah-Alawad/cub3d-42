@@ -42,7 +42,7 @@ int	is_colors_valid(int nbr)
 		return (1);
 	else
 	{
-		perror("invalid color range");
+		ft_putstr_fd("Error:\ninvalid color range\n", 2);
 		return (0);
 	}
 }

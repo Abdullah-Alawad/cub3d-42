@@ -78,8 +78,7 @@ int	init_texture(t_tokugawa_sokoku **yakuza)
 	if (!(*yakuza)->texture)
 	{
 		ft_putstr_fd("Error:\ntexture malloc failed\n", 2);
-		free_struct(*yakuza);
-		exit(1);
+		err_close(*yakuza);
 	}
 	(*yakuza)->texture->north = mlx_load_png((*yakuza)->map->wall->north);
 	(*yakuza)->texture->south = mlx_load_png((*yakuza)->map->wall->south);
@@ -88,9 +87,8 @@ int	init_texture(t_tokugawa_sokoku **yakuza)
 	if (!(*yakuza)->texture->north || !(*yakuza)->texture->east
 		|| !(*yakuza)->texture->south || !(*yakuza)->texture->west)
 	{
-		free_struct(*yakuza);
 		ft_putstr_fd("Error:\nTexture not loaded!\n", 2);
-		exit(1);
+		err_close(*yakuza);
 	}
 	return (1);
 }
@@ -118,8 +116,7 @@ void	setup_config(t_tokugawa_sokoku **yakuza, char **av, int ac)
 	if (!(*yakuza)->camera)
 	{
 		ft_putstr_fd("Error:\ncamera malloc failed\n", 2);
-		free_struct(*yakuza);
-		exit (1);
+		err_close(*yakuza);
 	}
 	init_minimap(&(*yakuza));
 }

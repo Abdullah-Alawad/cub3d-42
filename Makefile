@@ -10,6 +10,8 @@ SRC_FILES = yakuza colors parsing parsing_utils error_handling init_map \
 	map_validation_check map_validation_check_2 events  minimap tokugawa_sokoku init_tokugawa \
 	movements init_kumicho flood_fill utils parsing_check specials
 
+DIR_LIB = ./libft
+
 INC_DIR = includes
 
 SRCS =  $(addsuffix .c, $(addprefix $(SRC_DIR)/, $(SRC_FILES))) \
@@ -17,7 +19,6 @@ SRCS =  $(addsuffix .c, $(addprefix $(SRC_DIR)/, $(SRC_FILES))) \
 OBJCS = $(SRCS:.c=.o)
 
 
-DIR_LIB = ./libft
 LIBFT = $(DIR_LIB)/libft.a
 
 
@@ -29,10 +30,10 @@ MLX_FLAGS = -L/usr/local/lib -ldl -lglfw -pthread -lm
 
 all: $(LIBFT) $(MLX_LIB) $(NAME)
 
-$(NAME): $(OBJCS) $(LIBFT) $(MLX_LIB) includes/yakuza.h
+$(NAME): $(OBJCS) $(LIBFT) $(MLX_LIB) includes/yakuza.h 
 	$(CC) $(CFLAGS) $(OBJCS) -o $(NAME) -I$(DIR_LIB) $(MLX_INC) $(LIBFT) $(MLX_LIB) $(MLX_FLAGS)
 
-$(LIBFT):
+$(LIBFT): 
 	make -C $(DIR_LIB)
 
 $(MLX_LIB):
@@ -46,7 +47,7 @@ clean:
 
 fclean: clean
 	make fclean -C $(DIR_LIB)
-# 	rm -rf $(DIR_MLX)/build
+	rm -rf $(DIR_MLX)/build
 	rm -f $(NAME)
 
 .PHONY: all re clean fclean

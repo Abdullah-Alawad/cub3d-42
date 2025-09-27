@@ -11,20 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-/*#include <stdio.h>
-
-int	ft_atoi(const char *nptr);
-
-int	main(void)
-{
-	const char nptr[] = "+548";
-	char res;
-	
-	res = ft_atoi(nptr);
-	printf("res: %d", res);
-	return (0);
-}
-	*/
 
 int	ft_atoi(const char *nptr)
 {
@@ -52,4 +38,3 @@ int	ft_atoi(const char *nptr)
 	result *= sign;
 	return (result);
 }
-

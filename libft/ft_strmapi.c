@@ -59,4 +59,3 @@ char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 	amended_s[i] = '\0';
 	return (amended_s);
 }
-

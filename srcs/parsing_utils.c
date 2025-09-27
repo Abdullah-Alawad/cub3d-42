@@ -87,12 +87,6 @@ void	check_line(t_map **map, char *line)
 	i = 0;
 	while (line[i])
 	{
-		// if (line[i] != '1' && line[i] != '0' && line[i] != 'N'
-		// 	&& line[i] != '\n' && line[i] != 'S' && line[i] != 'E'
-		// 	&& line[i] != 'W' && line[i] != ' ')
-		// 	exit(1);
-		// if (line[i] == ' ')
-		// 	check_allowed_space(line, i);
 		if (line[i] == 'N' || line[i] == 'S' || line[i] == 'E'
 			|| line[i] == 'W')
 		{

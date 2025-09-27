@@ -32,8 +32,7 @@ int	init_minimap(t_tokugawa_sokoku **yakuza)
 	if (!(*yakuza)->minimap)
 	{
 		ft_putstr_fd("Error:\nminimap malloc failed\n", 2);
-		free_struct(*yakuza);
-		exit(1);
+		err_close(*yakuza);
 	}
 	(*yakuza)->minimap->h = 0;
 	(*yakuza)->minimap->w = 0;
@@ -43,8 +42,7 @@ int	init_minimap(t_tokugawa_sokoku **yakuza)
 				(*yakuza)->minimap->miniimg, 20, 20) < 0))
 	{
 		ft_putstr_fd("Error:\nminimap img malloc failed\n", 2);
-		free_struct(*yakuza);
-		exit(1);
+		err_close(*yakuza);
 	}
 	return (1);
 }
@@ -72,8 +70,7 @@ int	init_kumicho(t_tokugawa_sokoku **yakuza)
 	if (!(*yakuza)->kumicho)
 	{
 		ft_putstr_fd("Error:\nkumicho init failed\n", 2);
-		free_struct((*yakuza));
-		exit(1);
+		err_close(*yakuza);
 	}
 	init_kumicho_2(&(*yakuza));
 	return (1);
@@ -99,9 +96,8 @@ int	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza)
 	if (!(*yakuza)->img || (mlx_image_to_window((*yakuza)->mlx, (*yakuza)->img,
 				0, 0) < 0))
 	{
-		mlx_terminate((*yakuza)->mlx);
-		free(*yakuza);
 		ft_putstr_fd("Error:\nmlx_new_img(): failed\n", 2);
+		err_close(*yakuza);
 		return (0);
 	}
 	return (1);

@@ -27,7 +27,6 @@ int	special_err2(char *str)
 	return (0);
 }
 
-
 // func - 3
 int	check_error(t_parsing_flags *flags, t_map **map, char *map_buf, int fd)
 {
@@ -78,6 +77,7 @@ int	check_color_line(char *buf, int i)
 	else
 		return (0);
 }
+
 void	free_map_exit(t_map *map)
 {
 	free_map(map);

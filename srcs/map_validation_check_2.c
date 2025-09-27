@@ -33,3 +33,23 @@ int	init_error(int fd, char *map_buf)
 	}
 	return (0);
 }
+
+// func - 3
+int	count_colors(char **comb)
+{
+	int	k;
+	int	i;
+
+	k = 0;
+	while (comb[k])
+	{
+		i = 0;
+		while (comb[k][i] == ' ' || comb[k][i] == '\t')
+			i++;
+		if (ft_isdigit(comb[k][i]))
+			k++;
+		else
+			break ;
+	}
+	return (k);
+}

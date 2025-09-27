@@ -126,12 +126,12 @@ void	read_map(t_parsing_flags *flags, t_map **map, char **map_buf, int fd)
 		{
 			free(buf);
 			buf = NULL;
-			buf = get_next_line(fd);
 			if (flags->found_map)
 			{
 				flags->error = 1;
 				break ;
 			}
+			buf = get_next_line(fd);
 			continue ;
 		}
 		if (add_line(flags, buf, map_buf, map) == 0)

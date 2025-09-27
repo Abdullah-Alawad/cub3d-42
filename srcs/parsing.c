@@ -20,11 +20,11 @@ int	init_map(t_map **map, char *map_buf)
 	{
 		free_map(*map);
 		return (0);
-	}	
+	}
 	if (copy_map(&(*map)) == 0)
 	{
 		free_map(*map);
-		return (0);		
+		return (0);
 	}
 	return (1);
 }

@@ -69,13 +69,12 @@ static int	add_color(t_rgb *draw, char *buf)
 		free(b);
 		return (0);
 	}
-	while (comb[k])
-		k++;
+	k = count_colors(comb);
 	if (is_colors_checker(comb, &draw) == 0 || k != 3)
 	{
 		free_double_array(comb);
 		free(b);
-		write(2, "Error: invalid colors set\n", 26);
+		ft_putstr_fd("Error:\ninvalid colors set\n", 2);
 		return (0);
 	}
 	free(b);

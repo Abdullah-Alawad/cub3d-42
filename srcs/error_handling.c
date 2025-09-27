@@ -13,10 +13,15 @@
 #include "yakuza.h"
 
 // func - 1
-void	malloc_err(void)
+void	err_close(void *param)
 {
-	perror("malloc falied\n");
-	exit(EXIT_FAILURE);
+	t_tokugawa_sokoku	*yakuza;
+
+	yakuza = (t_tokugawa_sokoku *)param;
+	mlx_close_window(yakuza->mlx);
+	free_struct(yakuza);
+	mlx_terminate(yakuza->mlx);
+	exit(1);
 }
 
 // func - 2
