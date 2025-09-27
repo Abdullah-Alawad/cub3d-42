@@ -46,7 +46,7 @@ int	count_colors(char **comb)
 		i = 0;
 		while (comb[k][i] == ' ' || comb[k][i] == '\t')
 			i++;
-		if (ft_isdigit(comb[k][i]))
+		if (ft_isdigit(comb[k][i]) || comb[k][i] == '+')
 			k++;
 		else
 			break ;

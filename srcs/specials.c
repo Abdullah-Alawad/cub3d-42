@@ -65,7 +65,7 @@ int	check_color_line(char *buf, int i)
 	is_two = 0;
 	while (buf[i])
 	{
-		if (buf[i] != ' ' && buf[i] != '\t'
+		if (buf[i] != ' ' && buf[i] != '\t' && buf[i] != '+'
 			&& !ft_isdigit(buf[i]) && buf[i] != ',' && buf[i] != '\n')
 			return (0);
 		if (buf[i] == ',')

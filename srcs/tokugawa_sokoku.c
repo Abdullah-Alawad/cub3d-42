@@ -63,9 +63,9 @@ static mlx_texture_t	*choose_texture(t_tokugawa_sokoku *yakuza)
 	if (yakuza->camera->side == 0)
 	{
 		if (yakuza->camera->ray_dirx < 0)
-			return (yakuza->texture->west);
-		else
 			return (yakuza->texture->east);
+		else
+			return (yakuza->texture->west);
 	}
 	else
 	{
