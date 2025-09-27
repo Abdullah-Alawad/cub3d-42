@@ -161,7 +161,7 @@ void				enter_tokugawa_sokoku(void *land);
 // parsing.c
 int					parsing_reading(int ac, char **av, t_map **map);
 int					set_path(char *buf, t_map **map);
-void				init_map(t_map **map, char *map_buf);
+int					init_map(t_map **map, char *map_buf);
 
 // parsing_utils.c
 int					is_direction(char *buf);
@@ -188,6 +188,7 @@ int					is_path_valid(char *buf);
 
 // map_validation_check_2.c
 void				set_default_values(t_tokugawa_sokoku **yakuza);
+int					init_error(int fd, char *map_buf);
 
 // init_tokugawa.c
 int					init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza);
@@ -206,7 +207,7 @@ void				init_kumicho_2(t_tokugawa_sokoku **yakuza);
 void				minimap_color(t_map *map, int h, int w, uint32_t *color);
 
 // flood_fill.c
-void				copy_map(t_map **map);
+int					copy_map(t_map **map);
 int					flood_fill(t_map *map, int py, int px);
 int					save_player_positions(t_map **map);
 int					open_map(int *fd, char **av, int ac);

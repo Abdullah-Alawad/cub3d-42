@@ -13,14 +13,14 @@
 #include "yakuza.h"
 
 // func - 1
-void	copy_map(t_map **map)
+int	copy_map(t_map **map)
 {
 	int	line_no;
 
 	line_no = 0;
 	(*map)->cpy_map = malloc(sizeof(char *) * ((*map)->height + 1));
 	if (!(*map)->cpy_map)
-		malloc_err();
+		return (0);
 	(*map)->cpy_map[(*map)->height] = NULL;
 	while (line_no < (*map)->height)
 	{
@@ -30,9 +30,11 @@ void	copy_map(t_map **map)
 			while (line_no > 0)
 				free((*map)->cpy_map[--line_no]);
 			free((*map)->cpy_map);
+			return (0);
 		}
 		line_no++;
 	}
+	return (1);
 }
 
 // func - 2

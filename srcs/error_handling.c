@@ -63,7 +63,7 @@ void	free_map(t_map *map)
 // func - 4
 void	free_struct(t_tokugawa_sokoku *yakuza)
 {
-	if (yakuza->minimap->miniimg)
+	if (yakuza->minimap && yakuza->minimap->miniimg)
 		mlx_delete_image(yakuza->mlx, yakuza->minimap->miniimg);
 	if (yakuza->minimap)
 		free(yakuza->minimap);
@@ -86,5 +86,3 @@ void	free_struct(t_tokugawa_sokoku *yakuza)
 	if (yakuza->mlx)
 		mlx_delete_image(yakuza->mlx, yakuza->img);
 }
-
-// func - 5

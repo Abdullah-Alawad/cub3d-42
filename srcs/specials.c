@@ -27,6 +27,7 @@ int	special_err2(char *str)
 	return (0);
 }
 
+
 // func - 3
 int	check_error(t_parsing_flags *flags, t_map **map, char *map_buf, int fd)
 {
@@ -40,16 +41,17 @@ int	check_error(t_parsing_flags *flags, t_map **map, char *map_buf, int fd)
 			free(map_buf);
 			map_buf = NULL;
 		}
-		write(2, "Invalid map format\n", 20);
+		ft_putstr_fd("Error:\nInvalid map format\n", 2);
 		return (0);
 	}
-	init_map(map, map_buf);
+	if (init_map(map, map_buf) == 0)
+		return (init_error(fd, map_buf));
 	if (save_player_positions(map) == 0)
 	{
 		close(fd);
 		if (map_buf)
 			free(map_buf);
-		write(2, "Error:\nNo Player in map\n", 24);
+		ft_putstr_fd("Error:\nNo Player in map\n", 2);
 		return (0);
 	}
 	return (1);

@@ -88,6 +88,7 @@ int	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza)
 		ft_putstr_fd("Error:\nyakuza malloc: failed\n", 2);
 		return (0);
 	}
+	set_default_values(&(*yakuza));
 	if (init_mlx(&(*yakuza)->mlx) == 0)
 	{
 		ft_putstr_fd("Error:\nmlx_init(): failed\n", 2);
@@ -103,6 +104,5 @@ int	init_tokugawa_sokoku(t_tokugawa_sokoku **yakuza)
 		ft_putstr_fd("Error:\nmlx_new_img(): failed\n", 2);
 		return (0);
 	}
-	set_default_values(&(*yakuza));
 	return (1);
 }

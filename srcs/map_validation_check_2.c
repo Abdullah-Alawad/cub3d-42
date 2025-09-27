@@ -21,3 +21,15 @@ void	set_default_values(t_tokugawa_sokoku **yakuza)
 	(*yakuza)->kumicho = NULL;
 	(*yakuza)->texture = NULL;
 }
+
+// func - 2
+int	init_error(int fd, char *map_buf)
+{
+	close(fd);
+	if (map_buf)
+	{
+		free(map_buf);
+		map_buf = NULL;
+	}
+	return (0);
+}

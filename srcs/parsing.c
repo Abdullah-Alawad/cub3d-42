@@ -13,12 +13,20 @@
 #include "yakuza.h"
 
 // func - 1
-void	init_map(t_map **map, char *map_buf)
+int	init_map(t_map **map, char *map_buf)
 {
 	(*map)->map = ft_split(map_buf, '\n');
 	if (!(*map)->map)
-		malloc_err();
-	copy_map(&(*map));
+	{
+		free_map(*map);
+		return (0);
+	}	
+	if (copy_map(&(*map)) == 0)
+	{
+		free_map(*map);
+		return (0);		
+	}
+	return (1);
 }
 
 // func - 2
