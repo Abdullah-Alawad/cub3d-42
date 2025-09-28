@@ -35,30 +35,15 @@ void	keypress_hook(mlx_key_data_t keycode, void *param)
 }
 
 // func - 3
-void	handle_keys(mlx_key_data_t keycode, t_tokugawa_sokoku *yakuza)
-{
-	if (keycode.key == MLX_KEY_A)
-		left(yakuza);
-	else if (keycode.key == MLX_KEY_D)
-		right(yakuza);
-	else if (keycode.key == MLX_KEY_W)
-		forward(yakuza);
-	else if (keycode.key == MLX_KEY_S)
-		backward(yakuza);
-	else if (keycode.key == MLX_KEY_LEFT)
-		rotate_left(yakuza, ROT_SPEED);
-	else if (keycode.key == MLX_KEY_RIGHT)
-		rotate_right(yakuza, ROT_SPEED);
-}
-
-// func - 4
-void	rotate_right(t_tokugawa_sokoku *yakuza, double rotation_speed)
+void	rotate_right(t_tokugawa_sokoku *yakuza, double rotation_speed, char dir)
 {
 	double	old_dir_w;
 	double	old_plane_w;
 
 	old_dir_w = yakuza->kumicho->direction.w;
 	old_plane_w = yakuza->kumicho->plane.w;
+	if (dir == 'N' || dir == 'S')
+		rotation_speed = -rotation_speed;
 	yakuza->kumicho->direction.w = (yakuza->kumicho->direction.w
 			* cos(-rotation_speed)) - (yakuza->kumicho->direction.h
 			* sin(-rotation_speed));
@@ -70,14 +55,16 @@ void	rotate_right(t_tokugawa_sokoku *yakuza, double rotation_speed)
 		+ (yakuza->kumicho->plane.h * cos(-rotation_speed));
 }
 
-// // func - 5
-void	rotate_left(t_tokugawa_sokoku *yakuza, double rotation_speed)
+// // func - 4
+void	rotate_left(t_tokugawa_sokoku *yakuza, double rotation_speed, char dir)
 {
 	double	old_dir_w;
 	double	old_plane_w;
 
 	old_dir_w = yakuza->kumicho->direction.w;
 	old_plane_w = yakuza->kumicho->plane.w;
+	if (dir == 'N' || dir == 'S')
+		rotation_speed = -rotation_speed;
 	yakuza->kumicho->direction.w = (yakuza->kumicho->direction.w
 			* cos(rotation_speed)) - (yakuza->kumicho->direction.h
 			* sin(rotation_speed));

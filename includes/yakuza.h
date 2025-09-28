@@ -216,12 +216,11 @@ int					open_map(int *fd, char **av, int ac);
 // events.c
 void				keypress_hook(mlx_key_data_t keycode, void *param);
 void				close_win(void *param);
-void				handle_keys(mlx_key_data_t keycode,
-						t_tokugawa_sokoku *yakuza);
+
 void				rotate_left(t_tokugawa_sokoku *yakuza,
-						double rotation_speed);
+						double rotation_speed, char dir);
 void				rotate_right(t_tokugawa_sokoku *yakuza,
-						double rotation_speed);
+						double rotation_speed, char dir);
 
 // error_handling.c
 void				free_double_array(char **doub);

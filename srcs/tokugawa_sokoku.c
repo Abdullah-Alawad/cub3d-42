@@ -26,8 +26,8 @@ static void	find_wall_height(t_tokugawa_sokoku **yakuza)
 		player_to_wall_dis = ((*yakuza)->camera->mapy
 				- (*yakuza)->kumicho->offset.h + (1 - (*yakuza)->camera->stepy)
 				/ 2) / (*yakuza)->camera->ray_diry;
-	if (player_to_wall_dis <= 0.9)
-		player_to_wall_dis = 0.9;
+	if (player_to_wall_dis <= 0.76)
+		player_to_wall_dis = 0.76;
 	(*yakuza)->camera->player_to_wall_dis = player_to_wall_dis;
 	wall_len = ((int)HEIGHT / player_to_wall_dis);
 	(*yakuza)->camera->wall_starts = -wall_len / 2 + HEIGHT / 2;
@@ -57,7 +57,6 @@ static void	draw_wall_column(t_tokugawa_sokoku *yakuza, int x,
 }
 
 // func - 3
-// study if you want to flip
 static mlx_texture_t	*choose_texture(t_tokugawa_sokoku *yakuza)
 {
 	if (yakuza->camera->side == 0)
@@ -110,6 +109,7 @@ void	enter_tokugawa_sokoku(void *land)
 	t_tokugawa_sokoku	*yakuza;
 
 	yakuza = (t_tokugawa_sokoku *)land;
+	char	dir = yakuza->map->player_direction;
 	if (mlx_is_key_down(yakuza->mlx, MLX_KEY_W))
 		forward(yakuza);
 	if (mlx_is_key_down(yakuza->mlx, MLX_KEY_S))
@@ -119,9 +119,9 @@ void	enter_tokugawa_sokoku(void *land)
 	if (mlx_is_key_down(yakuza->mlx, MLX_KEY_D))
 		right(yakuza);
 	if (mlx_is_key_down(yakuza->mlx, MLX_KEY_LEFT))
-		rotate_left(yakuza, ROT_SPEED);
+		rotate_left(yakuza, ROT_SPEED, dir);
 	if (mlx_is_key_down(yakuza->mlx, MLX_KEY_RIGHT))
-		rotate_right(yakuza, ROT_SPEED);
+		rotate_right(yakuza, ROT_SPEED, dir);
 	set_ceiling_floor(&(yakuza));
 	raycasting(&yakuza);
 	minimap(yakuza->minimap, yakuza->map);
