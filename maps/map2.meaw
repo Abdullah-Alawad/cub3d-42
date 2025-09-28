@@ -1,0 +1,12 @@
+NO  ./texture/tree.png
+SO  ./texture/perfect.png
+WE  ./texture/wall_window.png
+EA  ./texture/wall.png
+
+F 500,116,73
+C 137,207,240
+
+111111
+100N01
+100001 
+111111 
